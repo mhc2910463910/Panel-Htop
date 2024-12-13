@@ -2,12 +2,13 @@ package org.lzmhc.dto;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.lzmhc.dto.ItemInterface.InfoItem;
 
 import java.util.List;
 
 @Getter
 @Setter
-public class InfoDto {
+public class InfoDto implements InfoItem {
     private ComputerSystemDto computerSystemDto;
     /**
      * 物理硬件

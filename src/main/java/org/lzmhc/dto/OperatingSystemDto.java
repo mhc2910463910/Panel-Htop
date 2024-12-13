@@ -2,11 +2,12 @@ package org.lzmhc.dto;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.lzmhc.dto.ItemInterface.InfoItem;
 import oshi.software.os.OperatingSystem;
 
 @Setter
 @Getter
-public class OperatingSystemDto {
+public class OperatingSystemDto implements InfoItem {
     private String family;
 //    系统家族
     private int bitness;

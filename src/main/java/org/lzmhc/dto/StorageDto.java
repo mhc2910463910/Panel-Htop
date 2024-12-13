@@ -2,10 +2,11 @@ package org.lzmhc.dto;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.lzmhc.dto.ItemInterface.InfoItem;
 
 @Getter
 @Setter
-public class StorageDto {
+public class StorageDto implements InfoItem {
     private String mainStorage;
     /**
      * 磁盘模型

@@ -2,10 +2,11 @@ package org.lzmhc.dto;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.lzmhc.dto.ItemInterface.InfoItem;
 
 @Getter
 @Setter
-public class PowerDto {
+public class PowerDto implements InfoItem {
     /**
      * 操作系统级别的电源名称
      */

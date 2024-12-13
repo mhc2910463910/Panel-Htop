@@ -15,10 +15,6 @@ import java.util.*;
 
 public class InfoHandle {
     private SystemInfo systemInfo;
-    /**
-     * processor info
-     * @return
-     */
     public void InfoHandle(SystemInfo systemInfo){
         this.systemInfo=systemInfo;
     }

@@ -2,12 +2,14 @@ package org.lzmhc.dto;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.lzmhc.dto.ItemInterface.InfoItem;
+import oshi.hardware.CentralProcessor;
 
 import java.util.List;
 
 @Setter
 @Getter
-public class ProcessorDto {
+public class ProcessorDto implements InfoItem {
         private String name;
         /**
          * 名称

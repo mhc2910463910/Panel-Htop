@@ -2,10 +2,11 @@ package org.lzmhc.dto;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.lzmhc.dto.ItemInterface.InfoItem;
 
 @Getter
 @Setter
-public class GlobalMemoryDto {
+public class GlobalMemoryDto implements InfoItem {
     private String availableMemory;
     /**
      * 可用物理内存
