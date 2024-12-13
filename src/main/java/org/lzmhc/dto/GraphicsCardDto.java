@@ -10,8 +10,16 @@ import java.util.List;
 @Getter
 @Setter
 public class GraphicsCardDto implements InfoItem {
-    private List<GraphicsCard> graphicsCardList;
+    private String name;
     /**
      * 显卡
+     */
+    private String vendor;
+    /**
+     * 供应商
+     */
+    private String vram;
+    /**
+     * 显存
      */
 }

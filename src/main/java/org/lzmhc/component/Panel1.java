@@ -1,17 +1,15 @@
 package org.lzmhc.component;
 
 import com.alibaba.fastjson.JSONArray;
-import org.lzmhc.dto.GlobalMemoryDto;
+import org.lzmhc.dto.*;
 import org.lzmhc.dto.ItemInterface.InfoItem;
-import org.lzmhc.dto.ProcessorDto;
 import org.lzmhc.dto.factory.DtoCreator;
 import org.lzmhc.dto.factory.InfoDto;
 import org.lzmhc.dto.singleton.InfoDtoSingleton;
-import org.lzmhc.handle.MemoryHandle;
-import org.lzmhc.handle.ProcessorHandle;
+import org.lzmhc.handle.*;
 import oshi.SystemInfo;
-import oshi.hardware.CentralProcessor;
-import oshi.hardware.GlobalMemory;
+import oshi.hardware.*;
+import oshi.software.os.OperatingSystem;
 
 import javax.swing.*;
 import java.awt.*;
@@ -62,7 +60,7 @@ public class Panel1 extends JPanel{
         item.addLabel("CPU温度", processorDto.getSensoresTemperature());
         item.addLabel("处理器", processorDto.getName());
         item.addLabel("频率", processorDto.getCurrentFreq() + "/" + processorDto.getMaxFreq());
-        item.addLabel("风扇速度", processorDto.getSensoresSpeedList().get(0));
+        item.addLabel("风扇速度", (processorDto.getSensoresSpeedList().size()>0)?processorDto.getSensoresSpeedList().get(0):"0");
         ArrayList<JLabel> labels = item.getLabels();
         for (JLabel label : labels) {
             panel.add(label);
@@ -84,7 +82,7 @@ public class Panel1 extends JPanel{
                     item.addLabel("CPU温度", processorDto.getSensoresTemperature());
                     item.addLabel("处理器", processorDto.getName());
                     item.addLabel("频率", processorDto.getCurrentFreq() + "/" + processorDto.getMaxFreq());
-                    item.addLabel("风扇速度", processorDto.getSensoresSpeedList().get(0));
+                    item.addLabel("风扇速度", (processorDto.getSensoresSpeedList().size()>0)?processorDto.getSensoresSpeedList().get(0):"0");
                     ArrayList<JLabel> labels = item.getLabels();
                     for (JLabel label : labels) {
                         panel.add(label);
@@ -150,62 +148,185 @@ public class Panel1 extends JPanel{
 //
     }
     private JPanel processPane3(){
-        JPanel panel = new JPanel(new GridLayout(4,1));
-        JLabel title = new JLabel("磁盘");
-        JLabel label1 = new JLabel(" 45% ");
-        JLabel label2 = new JLabel("磁盘类型：标准磁盘");
-        JLabel label3 = new JLabel("磁盘容量：467GB");
-        panel.setSize(425,540);
-        panel.setBackground(Color.GRAY);
-        panel.add(title);
-        panel.add(label1);
-        panel.add(label2);
-        panel.add(label3);
+        JPanel panel = new JPanel(new GridLayout(3,1));
+        PanelItem item = new PanelItem("磁盘");
+        java.util.List<HWDiskStore> diskStores = systemInfo.getHardware().getDiskStores();
+        StorageDto storageDto = dtoCreator.createDto(StorageDto.class);
+        CountDownLatch latch=new CountDownLatch(numThreads);
+        Thread thread=new StorageHandle(storageDto, diskStores,latch);
+        thread.start();
+        try{
+            latch.await();
+        } catch (InterruptedException err) {
+            err.printStackTrace();
+        }
+        item.addLabel("I/O", storageDto.getUsedRate()+"%");
+        item.addLabel("磁盘类型", storageDto.getMainStorage());
+        item.addLabel("磁盘容量", storageDto.getTotal());
+        ArrayList<JLabel> labels = item.getLabels();
+        for (JLabel label : labels) {
+            panel.add(label);
+        }
+        Timer time = new Timer(1000, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Thread thread = new StorageHandle(storageDto, diskStores,latch);
+                thread.start();
+                try {
+                    latch.await();
+                } catch (InterruptedException err) {
+                    err.printStackTrace();
+                }
+                item.flush();
+                panel.removeAll();
+                item.addLabel("I/O", storageDto.getUsedRate()+"%");
+                item.addLabel("磁盘类型", storageDto.getMainStorage());
+                item.addLabel("磁盘容量", storageDto.getTotal());
+                ArrayList<JLabel> labels = item.getLabels();
+                for (JLabel label : labels) {
+                    panel.add(label);
+                }
+                panel.updateUI();
+            }
+        });
+        time.start();
         return panel;
     }
     private JPanel processPane4(){
         JPanel panel = new JPanel(new GridLayout(5,1));
-        JLabel title = new JLabel(" 操作系统 ");
-        JLabel label1 = new JLabel(" deepin ");
-        JLabel label2 = new JLabel(" 版本：10.0");
-        JLabel label3 = new JLabel(" 操作系统版本号：20.9");
-        JLabel label4 = new JLabel(" 操作系统位：64");
-        panel.setSize(425,540);
-        panel.setBackground(Color.GRAY);
-        panel.add(title);
-        panel.add(label1);
-        panel.add(label2);
-        panel.add(label3);
-        panel.add(label4);
+        PanelItem item=new PanelItem("操作系统");
+        OperatingSystem operatingSystem = systemInfo.getOperatingSystem();
+        OperatingSystemDto operatingSystemDto=dtoCreator.createDto(OperatingSystemDto.class);
+        CountDownLatch latch=new CountDownLatch(numThreads);
+        Thread thread= new OperatingSystemHandle(operatingSystemDto, operatingSystem, latch);
+        thread.start();
+        try{
+            latch.await();
+        } catch (InterruptedException err) {
+            err.printStackTrace();
+        }
+        item.addLabel("操作系统", operatingSystemDto.getFamily());
+        item.addLabel("bit", operatingSystemDto.getBitness()+" bit");
+        item.addLabel("版本", operatingSystemDto.getVersionInfo().getVersion());
+        item.addLabel("操作系统版本", operatingSystemDto.getVersionInfo().getBuildNumber());
+        item.addLabel("开机时间", operatingSystemDto.getSystemboottime());
+        ArrayList<JLabel> labels = item.getLabels();
+        for (JLabel label : labels) {
+            panel.add(label);
+        }
+        /**
+         * 操作系统信息不需要动态更新
+         */
+//        Timer time = new Timer(1000, new ActionListener() {
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+//                Thread thread = new OperatingSystemHandle(operatingSystemDto, operatingSystem,latch);
+//                thread.start();
+//                try {
+//                    latch.await();
+//                } catch (InterruptedException err) {
+//                    err.printStackTrace();
+//                }
+//                item.flush();
+//                panel.removeAll();
+//                item.addLabel("操作系统", operatingSystemDto.getFamily());
+//                item.addLabel("bit", operatingSystemDto.getBitness()+" bit");
+//                item.addLabel("版本", operatingSystemDto.getVersionInfo().getVersion());
+//                item.addLabel("操作系统版本", operatingSystemDto.getVersionInfo().getBuildNumber());
+//                item.addLabel("开机时间", operatingSystemDto.getSystemboottime());
+//                ArrayList<JLabel> labels = item.getLabels();
+//                for (JLabel label : labels) {
+//                    panel.add(label);
+//                }
+//                panel.updateUI();
+//            }
+//        });
+//        time.start();
         return panel;
     }
     private JPanel processPane5(){
-        JPanel panel = new JPanel(new GridLayout(4,1));
-        JLabel title = new JLabel(" 显卡 ");
-        JLabel label1 = new JLabel("型号：AMD Radeon R4 Graphics");
-        JLabel label2 = new JLabel("供应商：Advanced Micro Devices");
-        JLabel label3 = new JLabel("显存：1024MB");
-        panel.setSize(425,540);
-        panel.setBackground(Color.GRAY);
-        panel.add(title);
-        panel.add(label1);
-        panel.add(label2);
-        panel.add(label3);
+        JPanel panel = new JPanel(new GridLayout(3,1));
+        PanelItem item = new PanelItem(" 显卡 ");
+        java.util.List<GraphicsCard> graphicsCards = systemInfo.getHardware().getGraphicsCards();
+        GraphicsCardDto graphicsCardDto = dtoCreator.createDto(GraphicsCardDto.class);
+        CountDownLatch latch=new CountDownLatch(numThreads);
+        Thread thread=new GraphicsCardHandle(graphicsCardDto, graphicsCards, latch);
+        thread.start();
+        try{
+            latch.await();
+        }catch (InterruptedException err){
+            err.printStackTrace();
+        }
+        item.addLabel("型号", graphicsCardDto.getName());
+        item.addLabel("供应商", graphicsCardDto.getVendor());
+        item.addLabel("显存", graphicsCardDto.getVram());
+        ArrayList<JLabel> labels = item.getLabels();
+        for (JLabel label : labels) {
+            panel.add(label);
+        }
+        /**
+         * 同上
+         */
         return panel;
     }
     private JPanel processPane6(){
-        JPanel panel = new JPanel(new GridLayout(4,1));
-        JLabel title = new JLabel(" 电源 ");
-        JLabel label1 = new JLabel(" 名称：X555-50");
-        JLabel label2 = new JLabel(" 电压：8.0v");
-        JLabel label3 = new JLabel(" 健康度：99%");
-        panel.setSize(425,540);
-        panel.setBackground(Color.GRAY);
-        panel.add(title);
-        panel.add(label1);
-        panel.add(label2);
-        panel.add(label3);
+        JPanel panel = new JPanel(new GridLayout(5,1));
+        PanelItem item = new PanelItem(" 电源 ");
+        PowerDto powerDto=dtoCreator.createDto(PowerDto.class);
+        java.util.List<PowerSource> powerSources = systemInfo.getHardware().getPowerSources();
+        CountDownLatch latch=new CountDownLatch(numThreads);
+        Thread thread = new PowHandle(powerDto,powerSources,latch);
+        thread.start();
+        try{
+            latch.await();
+        }catch (InterruptedException err){
+            err.printStackTrace();
+        }
+        ArrayList<JLabel> labels = item.getLabels();
+        for (JLabel label : labels) {
+            panel.add(label);
+        }
+        item.addLabel("设备名称", powerDto.getName());
+        item.addLabel("电压", powerDto.getVoltage());
+        item.addLabel("当前电量", String.valueOf(powerDto.getCurrentCapacity()/powerDto.getMaxCapacity()));
+        item.addLabel("电池健康度", String.valueOf(powerDto.getMaxCapacity()/powerDto.getDesignCapacity()));
+        item.addLabel("电池性质", powerDto.getChemistry());
+        Timer time = new Timer(1000, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Thread thread = new PowHandle(powerDto, powerSources,latch);
+                thread.start();
+                try {
+                    latch.await();
+                } catch (InterruptedException err) {
+                    err.printStackTrace();
+                }
+                item.flush();
+                panel.removeAll();
+                item.addLabel("设备名称", powerDto.getDeviceName());
+                item.addLabel("电压", powerDto.getVoltage());
+                item.addLabel("当前电量", String.valueOf(powerDto.getCurrentCapacity()/powerDto.getMaxCapacity()*100)+"%");
+                item.addLabel("电池健康度", String.valueOf(powerDto.getMaxCapacity()/powerDto.getDesignCapacity()*100)+"%");
+                item.addLabel("电池性质", powerDto.getChemistry());
+                ArrayList<JLabel> labels = item.getLabels();
+                for (JLabel label : labels) {
+                    panel.add(label);
+                }
+                panel.updateUI();
+            }
+        });
+        time.start();
         return panel;
+//        JLabel label1 = new JLabel(" 名称：X555-50");
+//        JLabel label2 = new JLabel(" 电压：8.0v");
+//        JLabel label3 = new JLabel(" 健康度：99%");
+//        panel.setSize(425,540);
+//        panel.setBackground(Color.GRAY);
+//        panel.add(title);
+//        panel.add(label1);
+//        panel.add(label2);
+//        panel.add(label3);
+//        return panel;
     }
     private String objTojson(ProcessorDto processorDto){
         Object obj = JSONArray.toJSON(processorDto);
