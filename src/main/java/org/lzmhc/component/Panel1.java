@@ -1,14 +1,17 @@
 package org.lzmhc.component;
 
 import com.alibaba.fastjson.JSONArray;
+import org.lzmhc.dto.GlobalMemoryDto;
 import org.lzmhc.dto.ItemInterface.InfoItem;
 import org.lzmhc.dto.ProcessorDto;
 import org.lzmhc.dto.factory.DtoCreator;
 import org.lzmhc.dto.factory.InfoDto;
 import org.lzmhc.dto.singleton.InfoDtoSingleton;
+import org.lzmhc.handle.MemoryHandle;
 import org.lzmhc.handle.ProcessorHandle;
 import oshi.SystemInfo;
 import oshi.hardware.CentralProcessor;
+import oshi.hardware.GlobalMemory;
 
 import javax.swing.*;
 import java.awt.*;
@@ -64,7 +67,7 @@ public class Panel1 extends JPanel{
         for (JLabel label : labels) {
             panel.add(label);
         }
-        Timer time = new Timer(2000, new ActionListener() {
+        Timer time = new Timer(1000, new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     Thread thread = new ProcessorHandle(processorDto, processor,latch);
@@ -97,22 +100,54 @@ public class Panel1 extends JPanel{
      * @return
      */
     private JPanel processPane2(){
-        JPanel panel = new JPanel(new GridLayout(6,1));
-        JLabel title = new JLabel("内存");
-        JLabel label1 = new JLabel("使用率：45% ");
-        JLabel label2 = new JLabel("已使用：4.7G/15.5G");
-        JLabel label3 = new JLabel("可用：6.7G");
-        JLabel label4 = new JLabel("虚拟内存：8.00G");
-        JLabel label5 = new JLabel("内存类型：DDR3");
-        panel.setSize(425,540);
-        panel.setBackground(Color.GRAY);
-        panel.add(title);
-        panel.add(label1);
-        panel.add(label2);
-        panel.add(label3);
-        panel.add(label4);
-        panel.add(label5);
+        JPanel panel = new JPanel(new GridLayout(5,1));
+        PanelItem item = new PanelItem("内存");
+        GlobalMemory globalMemory = systemInfo.getHardware().getMemory();
+        GlobalMemoryDto globalMemoryDto = dtoCreator.createDto(GlobalMemoryDto.class);
+        CountDownLatch latch=new CountDownLatch(numThreads);
+        Thread thread = new MemoryHandle(globalMemoryDto, globalMemory, latch);
+        thread.start();
+        try{
+            latch.await();
+        }catch (InterruptedException err){
+            err.printStackTrace();
+        }
+        item.addLabel("使用率", globalMemoryDto.getPercentage()+"%");
+        item.addLabel("已使用",globalMemoryDto.getUsedMemory()+"/"+globalMemoryDto.getTotalMemory());
+        item.addLabel("可用", globalMemoryDto.getAvailableMemory());
+        item.addLabel("虚拟内存", globalMemoryDto.getVirtualUsedMemory()+"/"+globalMemoryDto.getVirtuallMemory());
+        item.addLabel("内存类型/bit",globalMemoryDto.getRamTypeOrOsBitDepth());
+        ArrayList<JLabel> labels = item.getLabels();
+        for (JLabel label : labels) {
+            panel.add(label);
+        }
+        Timer time = new Timer(1000, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Thread thread = new MemoryHandle(globalMemoryDto, globalMemory,latch);
+                thread.start();
+                try {
+                    latch.await();
+                } catch (InterruptedException err) {
+                    err.printStackTrace();
+                }
+                item.flush();
+                panel.removeAll();
+                item.addLabel("使用率", globalMemoryDto.getPercentage()+"%");
+                item.addLabel("已使用",globalMemoryDto.getUsedMemory()+"/"+globalMemoryDto.getTotalMemory());
+                item.addLabel("可用", globalMemoryDto.getAvailableMemory());
+                item.addLabel("虚拟内存", globalMemoryDto.getVirtualUsedMemory()+"/"+globalMemoryDto.getVirtuallMemory());
+                item.addLabel("内存类型/bit",globalMemoryDto.getRamTypeOrOsBitDepth());
+                ArrayList<JLabel> labels = item.getLabels();
+                for (JLabel label : labels) {
+                    panel.add(label);
+                }
+                panel.updateUI();
+            }
+        });
+        time.start();
         return panel;
+//
     }
     private JPanel processPane3(){
         JPanel panel = new JPanel(new GridLayout(4,1));

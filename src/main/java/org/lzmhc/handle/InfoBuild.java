@@ -2,6 +2,12 @@ package org.lzmhc.handle;
 
 import org.lzmhc.dto.ItemInterface.InfoItem;
 
+import java.util.concurrent.CountDownLatch;
+
 public interface InfoBuild {
-    public void build(InfoItem infoItem, Object obj);
+    /**
+     * 动态数据更新
+     */
+    public void build();
+
 }

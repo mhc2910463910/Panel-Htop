@@ -12,7 +12,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
 
-public class ProcessorHandle extends Thread{
+public class ProcessorHandle extends Thread implements InfoBuild{
     InfoItem infoItem;
     Object obj;
     private final CountDownLatch latch;
