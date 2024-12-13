@@ -1,6 +1,8 @@
 package org.lzmhc;
 
 import javax.swing.*;
+import javax.swing.plaf.metal.MetalTheme;
+import javax.swing.plaf.metal.OceanTheme;
 
 import org.jb2011.lnf.beautyeye.*;
 import org.lzmhc.component.Panel1;
@@ -93,9 +95,8 @@ public class HtopPanel extends JFrame {
     public static void main(String[] args) {
         try{
             //设置窗口边框
-            BeautyEyeLNFHelper.frameBorderStyle = BeautyEyeLNFHelper.FrameBorderStyle.translucencySmallShadow;
+            BeautyEyeLNFHelper.frameBorderStyle = BeautyEyeLNFHelper.FrameBorderStyle.osLookAndFeelDecorated;
             UIManager.put("RootPane.setupButtonVisible", false);
-
             BeautyEyeLNFHelper.launchBeautyEyeLNF();
         }catch (Exception e){
             e.printStackTrace();
