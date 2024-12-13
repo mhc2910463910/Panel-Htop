@@ -12,11 +12,16 @@ import oshi.hardware.CentralProcessor;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.Time;
 import java.util.ArrayList;
+import java.util.concurrent.CountDownLatch;
 
 public class Panel1 extends JPanel{
     private SystemInfo systemInfo = InfoDtoSingleton.getInfoDto();
     private DtoCreator dtoCreator = new InfoDto();
+    private int numThreads = 1;
     /**
      * 概览
      * @return
@@ -36,26 +41,57 @@ public class Panel1 extends JPanel{
     /**
      * 处理器
      */
-    private JPanel processPanel(){
+    private JPanel processPanel()  {
         JPanel panel = new JPanel(new GridLayout(6,1));
         PanelItem item=new PanelItem("处理器");
         CentralProcessor processor = systemInfo.getHardware().getProcessor();
         ProcessorDto processorDto = dtoCreator.createDto(ProcessorDto.class);
-        ProcessorHandle.build(processorDto, processor);
-        item.setInfoItem(processorDto);
-        item.addLabel("利用率",((ProcessorDto)item.getInfoItem()).getUsedRate()+"%");
-        item.addLabel("CPU电压",((ProcessorDto)item.getInfoItem()).getSensorsVoltage());
-        item.addLabel("CPU温度",(((ProcessorDto) item.getInfoItem()).getSensoresTemperature()));
-        item.addLabel("处理器",(((ProcessorDto) item.getInfoItem()).getName()));
-        item.addLabel("频率",(((ProcessorDto) item.getInfoItem()).getCurrentFreq()+"/"+((ProcessorDto) item.getInfoItem()).getMaxFreq()));
-        item.addLabel("风扇速度",(((ProcessorDto) item.getInfoItem()).getSensoresSpeedList().get(0)));
+        CountDownLatch latch = new CountDownLatch(numThreads);
+        Thread thread = new ProcessorHandle(processorDto, processor,latch);
+        thread.start();
+        try {
+            latch.await();
+        } catch (InterruptedException err) {
+            err.printStackTrace();
+        }
+        item.addLabel("利用率", processorDto.getUsedRate() + "%");
+        item.addLabel("CPU电压", processorDto.getSensorsVoltage());
+        item.addLabel("CPU温度", processorDto.getSensoresTemperature());
+        item.addLabel("处理器", processorDto.getName());
+        item.addLabel("频率", processorDto.getCurrentFreq() + "/" + processorDto.getMaxFreq());
+        item.addLabel("风扇速度", processorDto.getSensoresSpeedList().get(0));
         ArrayList<JLabel> labels = item.getLabels();
-        for(JLabel label:labels){
+        for (JLabel label : labels) {
             panel.add(label);
         }
-        return panel;
+        Timer time = new Timer(2000, new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    Thread thread = new ProcessorHandle(processorDto, processor,latch);
+                    thread.start();
+                    try {
+                        latch.await();
+                    } catch (InterruptedException err) {
+                        err.printStackTrace();
+                    }
+                    item.flush();
+                    panel.removeAll();
+                    item.addLabel("利用率", processorDto.getUsedRate() + "%");
+                    item.addLabel("CPU电压", processorDto.getSensorsVoltage());
+                    item.addLabel("CPU温度", processorDto.getSensoresTemperature());
+                    item.addLabel("处理器", processorDto.getName());
+                    item.addLabel("频率", processorDto.getCurrentFreq() + "/" + processorDto.getMaxFreq());
+                    item.addLabel("风扇速度", processorDto.getSensoresSpeedList().get(0));
+                    ArrayList<JLabel> labels = item.getLabels();
+                    for (JLabel label : labels) {
+                        panel.add(label);
+                    }
+                    panel.updateUI();
+                }
+            });
+            time.start();
+            return panel;
     }
-
     /**
      * 内存
      * @return
@@ -135,5 +171,10 @@ public class Panel1 extends JPanel{
         panel.add(label2);
         panel.add(label3);
         return panel;
+    }
+    private String objTojson(ProcessorDto processorDto){
+        Object obj = JSONArray.toJSON(processorDto);
+        String json = obj.toString();
+        return json;
     }
 }

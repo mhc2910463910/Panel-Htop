@@ -10,9 +10,18 @@ import oshi.util.Util;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.CountDownLatch;
 
-public class ProcessorHandle{
-    private static String getConvertedFrequency(long[] hertzArray){
+public class ProcessorHandle extends Thread{
+    InfoItem infoItem;
+    Object obj;
+    private final CountDownLatch latch;
+    public ProcessorHandle(InfoItem infoItem, Object obj,CountDownLatch latch){
+        this.infoItem=infoItem;
+        this.obj=obj;
+        this.latch=latch;
+    }
+    private String getConvertedFrequency(long[] hertzArray){
         long totalFrequency = Arrays.stream(hertzArray).sum();
         long hertz = totalFrequency / hertzArray.length;
         if((hertz/1E+6)>999){
@@ -21,14 +30,14 @@ public class ProcessorHandle{
             return Math.round(hertz/1E+6)+" MHz";
         }
     }
-    private static  String getConvertedFrequency(long hertz){
+    private String getConvertedFrequency(long hertz){
         if((hertz/1E+6)>999){
             return (Math.round((hertz / 1E+9)*10.0)/10.0)+" GHz";
         }else{
             return Math.round(hertz/1E+6)+" MHz";
         }
     }
-    public static  void build(InfoItem infoItem, Object obj) {
+    public void build() {
         ProcessorDto processorDto = (ProcessorDto) infoItem;
         CentralProcessor centralProcessor = (CentralProcessor)obj;
             processorDto.setBitDepth(centralProcessor.getProcessorIdentifier().isCpu64bit()?"64":"32"+"-bit");
@@ -56,5 +65,14 @@ public class ProcessorHandle{
         long currTotalTicks = Arrays.stream(currTicksArray).sum();
         long currIdleTicks = currTicksArray[CentralProcessor.TickType.IDLE.getIndex()];
         processorDto.setUsedRate(String.valueOf((int)Math.round((1-((double)(currIdleTicks-prevIdleTicks))/((double)(currTotalTicks-prevTotalTicks)))*100)));
+    }
+
+    @Override
+    public void run() {
+        try {
+            this.build();
+        }finally {
+            latch.countDown();
+        }
     }
 }

@@ -22,5 +22,7 @@ public class PanelItem {
         JLabel label= new JLabel(name+" : "+value);
         labels.add(label);
     }
-
+    public void flush(){
+        this.labels.clear();
+    }
 }
