@@ -1,5 +1,6 @@
 package org.lzmhc.component;
 
+import com.alibaba.fastjson.JSONArray;
 import org.lzmhc.dto.*;
 import org.lzmhc.dto.factory.DtoCreator;
 import org.lzmhc.dto.factory.InfoDto;
@@ -155,6 +156,7 @@ public class Panel1 extends JPanel{
                 item.addLabel("磁盘类型", storageDto.getMainStorage());
                 item.addLabel("磁盘容量", storageDto.getTotal());
                 item.updateUI();
+//                System.out.println(objTojson(storageDto));
             }
         });
         time.start();
@@ -270,9 +272,9 @@ public class Panel1 extends JPanel{
      * @param processorDto
      * @return
      */
-//    private String objTojson(ProcessorDto processorDto){
-//        Object obj = JSONArray.toJSON(processorDto);
-//        String json = obj.toString();
-//        return json;
-//    }
+    private String objTojson(StorageDto processorDto){
+        Object obj = JSONArray.toJSON(processorDto);
+        String json = obj.toString();
+        return json;
+    }
 }

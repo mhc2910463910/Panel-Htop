@@ -63,6 +63,7 @@ public class StorageHandle extends Thread implements InfoBuild{
             long freeStorages = fileSystem.getFileStores().stream().mapToLong(OSFileStore::getFreeSpace).sum();
             String usedRate = String.valueOf((int)Math.round(((double)(totalStorage-freeStorages)/totalStorage)*100));
             storageDto.setUsedRate(usedRate);
+//            System.out.println(storageDto.getUsedRate());
     }
 
     @Override
