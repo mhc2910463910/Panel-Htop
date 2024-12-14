@@ -38,7 +38,7 @@ public class Panel1 extends JPanel{
     /**
      * 处理器
      */
-    private JPanel processPane1()  {
+    private JPanel processPane1(){
         ImageIcon icon = new ImageIcon("img/cpu.png");
         PanelItem item=new PanelItem("处理器",new GridLayout(7,1), icon, color);
         CentralProcessor processor = systemInfo.getHardware().getProcessor();
@@ -246,8 +246,8 @@ public class Panel1 extends JPanel{
         }
         item.addLabel("设备名称", powerDto.getName());
         item.addLabel("电压", powerDto.getVoltage());
-        item.addLabel("当前电量", String.valueOf(powerDto.getCurrentCapacity()/powerDto.getMaxCapacity()));
-        item.addLabel("电池健康度", String.valueOf(powerDto.getMaxCapacity()/powerDto.getDesignCapacity()));
+        item.addLabel("当前电量", String.format("%.1f",powerDto.getCurrentCapacity()/powerDto.getMaxCapacity()));
+        item.addLabel("电池健康度", String.format("%.1f",powerDto.getMaxCapacity()/powerDto.getDesignCapacity()));
         item.addLabel("电池性质", powerDto.getChemistry());
         Timer time = new Timer(1000, new ActionListener() {
             @Override

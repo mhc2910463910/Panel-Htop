@@ -46,7 +46,7 @@ public class ProcessorHandle extends Thread implements InfoBuild{
             processorDto.setMaxFreq(getConvertedFrequency(centralProcessor.getMaxFreq()));
             processorDto.setCurrentFreq(getConvertedFrequency(centralProcessor.getCurrentFreq()));
         Sensors sensors = InfoDtoSingleton.getInfoDto().getHardware().getSensors();
-            processorDto.setSensoresTemperature(String.format("%.2f", sensors.getCpuTemperature())+" 摄氏度");
+            processorDto.setSensoresTemperature(String.format("%.2f", sensors.getCpuTemperature())+" ℃");
             processorDto.setSensorsVoltage(String.format("%.2f", sensors.getCpuVoltage())+" v");
         int[] fanSpeeds = sensors.getFanSpeeds();
         List<String> speedList = new ArrayList<>();
