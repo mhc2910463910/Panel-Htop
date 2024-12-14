@@ -47,6 +47,12 @@
       <version>3.7</version>
       <systemPath>${project.basedir}/src/main/resources/lib/beautyeye_lnf.jar</systemPath>
     </dependency>
+    <dependency>
+      <groupId>io.github.vincenzopalazzo</groupId>
+      <artifactId>material-ui-swing</artifactId>
+      <version>1.1.2</version>
+    </dependency>
+
     <!--        OSHI 是一个免费的基于 JNA 的（原生）Java 操作系统和硬件信息库。-->
     <dependency>
       <groupId>com.github.oshi</groupId>

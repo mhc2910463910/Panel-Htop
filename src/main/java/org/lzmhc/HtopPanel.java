@@ -1,9 +1,12 @@
 package org.lzmhc;
 
 import javax.swing.*;
+import javax.swing.border.Border;
 import javax.swing.plaf.metal.MetalTheme;
 import javax.swing.plaf.metal.OceanTheme;
 
+import mdlaf.MaterialLookAndFeel;
+import mdlaf.utils.MaterialBorders;
 import org.jb2011.lnf.beautyeye.*;
 import org.lzmhc.component.Panel1;
 
@@ -94,10 +97,16 @@ public class HtopPanel extends JFrame {
     }
     public static void main(String[] args) {
         try{
-            //设置窗口边框
-            BeautyEyeLNFHelper.frameBorderStyle = BeautyEyeLNFHelper.FrameBorderStyle.osLookAndFeelDecorated;
-            UIManager.put("RootPane.setupButtonVisible", false);
-            BeautyEyeLNFHelper.launchBeautyEyeLNF();
+            /**
+             * beautyeyeUI
+             */
+//            BeautyEyeLNFHelper.frameBorderStyle = BeautyEyeLNFHelper.FrameBorderStyle.osLookAndFeelDecorated;
+//            UIManager.put("RootPane.setupButtonVisible", false);
+//            BeautyEyeLNFHelper.launchBeautyEyeLNF();
+            /**
+             * Material-UI-Swing
+             */
+            UIManager.setLookAndFeel(new MaterialLookAndFeel(new MaterialOrientalFontsTheme()));
         }catch (Exception e){
             e.printStackTrace();
         }

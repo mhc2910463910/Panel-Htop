@@ -19,6 +19,7 @@ public class Panel1 extends JPanel{
     private SystemInfo systemInfo = InfoDtoSingleton.getInfoDto();
     private DtoCreator dtoCreator = new InfoDto();
     private int numThreads = 1;
+    private String color = "#355c7d";
     /**
      * 概览
      * @return
@@ -26,7 +27,7 @@ public class Panel1 extends JPanel{
     public Panel1(){
         GridLayout gridLayout = new GridLayout(2,3);
         setLayout(gridLayout);
-        this.add(this.processPanel1());
+        this.add(this.processPane1());
         this.add(this.processPane2());
         this.add(this.processPane3());
         this.add(this.processPane4());
@@ -36,9 +37,9 @@ public class Panel1 extends JPanel{
     /**
      * 处理器
      */
-    private JPanel processPanel1()  {
+    private JPanel processPane1()  {
         ImageIcon icon = new ImageIcon("img/cpu.png");
-        PanelItem item=new PanelItem("处理器",new GridLayout(7,1), icon, "#cca8e9");
+        PanelItem item=new PanelItem("处理器",new GridLayout(7,1), icon, color);
         CentralProcessor processor = systemInfo.getHardware().getProcessor();
         ProcessorDto processorDto = dtoCreator.createDto(ProcessorDto.class);
         CountDownLatch latch = new CountDownLatch(numThreads);
@@ -84,7 +85,7 @@ public class Panel1 extends JPanel{
      */
     private JPanel processPane2(){
         ImageIcon icon = new ImageIcon("img/java.png");
-        PanelItem item = new PanelItem("内存",new GridLayout(6,1), icon,"#c3bef0");
+        PanelItem item = new PanelItem("内存",new GridLayout(6,1), icon,color);
         GlobalMemory globalMemory = systemInfo.getHardware().getMemory();
         GlobalMemoryDto globalMemoryDto = dtoCreator.createDto(GlobalMemoryDto.class);
         CountDownLatch latch=new CountDownLatch(numThreads);
@@ -125,7 +126,7 @@ public class Panel1 extends JPanel{
     }
     private JPanel processPane3(){
         ImageIcon icon=new ImageIcon("img/computer.png");
-        PanelItem item = new PanelItem("磁盘",new GridLayout(4,1), icon, "#cadefc");
+        PanelItem item = new PanelItem("磁盘",new GridLayout(4,1), icon, color);
         java.util.List<HWDiskStore> diskStores = systemInfo.getHardware().getDiskStores();
         StorageDto storageDto = dtoCreator.createDto(StorageDto.class);
         CountDownLatch latch=new CountDownLatch(numThreads);
@@ -161,7 +162,7 @@ public class Panel1 extends JPanel{
     }
     private JPanel processPane4(){
         ImageIcon icon = new ImageIcon("img/linux.png");
-        PanelItem item=new PanelItem("操作系统",new GridLayout(6,1), icon, "#defcf9");
+        PanelItem item=new PanelItem("操作系统",new GridLayout(6,1), icon, color);
         OperatingSystem operatingSystem = systemInfo.getOperatingSystem();
         OperatingSystemDto operatingSystemDto=dtoCreator.createDto(OperatingSystemDto.class);
         CountDownLatch latch=new CountDownLatch(numThreads);
@@ -204,7 +205,7 @@ public class Panel1 extends JPanel{
     }
     private JPanel processPane5(){
         ImageIcon icon = new ImageIcon("img/graphics.png");
-        PanelItem item = new PanelItem(" 显卡 ",new GridLayout(4,1), icon, "#ffaaa5");
+        PanelItem item = new PanelItem(" 显卡 ",new GridLayout(4,1), icon, color);
         java.util.List<GraphicsCard> graphicsCards = systemInfo.getHardware().getGraphicsCards();
         GraphicsCardDto graphicsCardDto = dtoCreator.createDto(GraphicsCardDto.class);
         CountDownLatch latch=new CountDownLatch(numThreads);
@@ -225,7 +226,7 @@ public class Panel1 extends JPanel{
     }
     private JPanel processPane6(){
         ImageIcon icon=new ImageIcon("img/pow.png");
-        PanelItem item = new PanelItem(" 电源 ",new GridLayout(6,1), icon, "#a8e6cf");
+        PanelItem item = new PanelItem(" 电源 ",new GridLayout(6,1), icon, color);
         PowerDto powerDto=dtoCreator.createDto(PowerDto.class);
         java.util.List<PowerSource> powerSources = systemInfo.getHardware().getPowerSources();
         CountDownLatch latch=new CountDownLatch(numThreads);

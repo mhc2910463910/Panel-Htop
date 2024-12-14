@@ -2,6 +2,7 @@ package org.lzmhc.component;
 
 import lombok.Getter;
 import lombok.Setter;
+import mdlaf.components.panel.MaterialPanelUI;
 import org.jb2011.lnf.beautyeye.widget.border.BEDashedRoundRecBorder;
 import org.jb2011.lnf.beautyeye.widget.border.BERoundBorder;
 import org.jb2011.lnf.beautyeye.widget.border.BEShadowBorder;
@@ -26,7 +27,6 @@ public class PanelItem extends JPanel {
         this.setLayout(layoutManager);
         this.addLabelIcon(icon);
         this.setBackground(Color.decode(color));
-
     }
     public void addLabelIcon(ImageIcon icon){
         Image image = icon.getImage();
