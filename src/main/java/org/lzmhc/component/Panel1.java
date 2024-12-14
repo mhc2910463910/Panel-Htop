@@ -20,7 +20,7 @@ public class Panel1 extends JPanel{
     private SystemInfo systemInfo = InfoDtoSingleton.getInfoDto();
     private DtoCreator dtoCreator = new InfoDto();
     private int numThreads = 1;
-    private String color = "#444f5a";
+    private String color = "#2d4059";
     /**
      * 概览
      * @return
@@ -85,7 +85,7 @@ public class Panel1 extends JPanel{
      * @return
      */
     private JPanel processPane2(){
-        ImageIcon icon = new ImageIcon("img/java.png");
+        ImageIcon icon = new ImageIcon("img/ram.png");
         PanelItem item = new PanelItem("内存",new GridLayout(6,1), icon,color);
         GlobalMemory globalMemory = systemInfo.getHardware().getMemory();
         GlobalMemoryDto globalMemoryDto = dtoCreator.createDto(GlobalMemoryDto.class);
@@ -126,7 +126,7 @@ public class Panel1 extends JPanel{
 //
     }
     private JPanel processPane3(){
-        ImageIcon icon=new ImageIcon("img/computer.png");
+        ImageIcon icon=new ImageIcon("img/ssd.png");
         PanelItem item = new PanelItem("磁盘",new GridLayout(4,1), icon, color);
         java.util.List<HWDiskStore> diskStores = systemInfo.getHardware().getDiskStores();
         StorageDto storageDto = dtoCreator.createDto(StorageDto.class);
@@ -163,7 +163,12 @@ public class Panel1 extends JPanel{
         return item;
     }
     private JPanel processPane4(){
-        ImageIcon icon = new ImageIcon("img/linux.png");
+        ImageIcon icon = null;
+        if(systemInfo.getOperatingSystem().getFamily().toLowerCase().equals("windows")){
+            icon = new ImageIcon("img/windows.png");
+        }else{
+            icon = new ImageIcon("img/linux.png");
+        }
         PanelItem item=new PanelItem("操作系统",new GridLayout(6,1), icon, color);
         OperatingSystem operatingSystem = systemInfo.getOperatingSystem();
         OperatingSystemDto operatingSystemDto=dtoCreator.createDto(OperatingSystemDto.class);
