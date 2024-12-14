@@ -1,14 +1,10 @@
 package org.lzmhc;
 
 import javax.swing.*;
-import javax.swing.border.Border;
-import javax.swing.plaf.metal.MetalTheme;
-import javax.swing.plaf.metal.OceanTheme;
 
 import mdlaf.MaterialLookAndFeel;
-import mdlaf.utils.MaterialBorders;
-import org.jb2011.lnf.beautyeye.*;
 import org.lzmhc.component.Panel1;
+import org.lzmhc.themes.MaterialOrientalTheme;
 
 /**
  * Hello world!
@@ -21,12 +17,12 @@ public class HtopPanel extends JFrame {
         setTitle("简易的监控面板");
         setSize(1080,720);
         JPanel panel_1 = new Panel1();
-        JPanel panel_2 = this.createPanel2();
-        JPanel panel_3 = this.createPanel3();
-        JPanel panel_4 = this.createPanel4();
-        JPanel panel_5 = this.createPanel5();
-        JPanel panel_6 = this.createPanel6();
-        JPanel panel_7 = this.createPanel7();
+        JPanel panel_2 = new JPanel();
+        JPanel panel_3 = new JPanel();
+        JPanel panel_4 = new JPanel();
+        JPanel panel_5 = new JPanel();
+        JPanel panel_6 = new JPanel();
+        JPanel panel_7 = new JPanel();
 
         JTabbedPane tabbedPane = new JTabbedPane();
         tabbedPane.addTab("概览",panel_1);
@@ -40,61 +36,6 @@ public class HtopPanel extends JFrame {
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     }
 
-
-    /**
-     * 处理器
-     * @return
-     */
-    public JPanel createPanel2(){
-        JPanel panel = new JPanel();
-
-        return panel;
-    }
-    /**
-     * 内存
-     * @return
-     */
-    public JPanel createPanel3(){
-        JPanel panel = new JPanel();
-
-        return panel;
-    }
-    /**
-     * 磁盘
-     * @return
-     */
-    public JPanel createPanel4(){
-        JPanel panel = new JPanel();
-
-        return panel;
-    }
-    /**
-     * 操作系统
-     * @return
-     */
-    public JPanel createPanel5(){
-        JPanel panel = new JPanel();
-
-        return panel;
-    }
-    /**
-     * 显卡
-     * @return
-     */
-    public JPanel createPanel6(){
-        JPanel panel = new JPanel();
-
-        return panel;
-    }
-    /**
-     * 电源
-     * @return
-     */
-    public JPanel createPanel7(){
-        JPanel panel = new JPanel();
-
-        return panel;
-    }
     public static void main(String[] args) {
         try{
             /**
@@ -106,7 +47,7 @@ public class HtopPanel extends JFrame {
             /**
              * Material-UI-Swing
              */
-            UIManager.setLookAndFeel(new MaterialLookAndFeel(new MaterialOrientalFontsTheme()));
+            UIManager.setLookAndFeel(new MaterialLookAndFeel(new MaterialOrientalTheme()));
         }catch (Exception e){
             e.printStackTrace();
         }

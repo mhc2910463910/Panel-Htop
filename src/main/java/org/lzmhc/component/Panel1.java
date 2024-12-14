@@ -19,7 +19,7 @@ public class Panel1 extends JPanel{
     private SystemInfo systemInfo = InfoDtoSingleton.getInfoDto();
     private DtoCreator dtoCreator = new InfoDto();
     private int numThreads = 1;
-    private String color = "#355c7d";
+    private String color = "#444f5a";
     /**
      * 概览
      * @return
