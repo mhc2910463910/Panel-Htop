@@ -17,7 +17,7 @@ import java.awt.*;
 public class MaterialOrientalTheme extends MaterialLiteTheme {
     @Override
     protected void installFonts() {
-        Font font = FontUtil.loadFont("font/sun.ttf", 18f);
+        Font font = FontUtil.loadFont("font/AaBanRuoKaiShuJiaCu-2.ttf", 18f);
         this.fontBold = new javax.swing.plaf.FontUIResource(font);
         this.fontItalic = new javax.swing.plaf.FontUIResource(font);
         this.fontMedium = new javax.swing.plaf.FontUIResource(font);

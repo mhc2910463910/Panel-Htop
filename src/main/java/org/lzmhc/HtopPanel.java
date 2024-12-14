@@ -6,8 +6,6 @@ import mdlaf.MaterialLookAndFeel;
 import org.lzmhc.component.Panel1;
 import org.lzmhc.themes.MaterialOrientalTheme;
 
-import java.awt.*;
-
 /**
  * Hello world!
  */
