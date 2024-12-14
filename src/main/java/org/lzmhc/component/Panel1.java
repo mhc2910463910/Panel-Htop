@@ -262,8 +262,8 @@ public class Panel1 extends JPanel{
                 item.removeAll();
                 item.addLabel("设备名称", powerDto.getDeviceName());
                 item.addLabel("电压", powerDto.getVoltage());
-                item.addLabel("当前电量", String.valueOf(powerDto.getCurrentCapacity()/powerDto.getMaxCapacity()*100)+"%");
-                item.addLabel("电池健康度", String.valueOf(powerDto.getMaxCapacity()/powerDto.getDesignCapacity()*100)+"%");
+                item.addLabel("当前电量", String.format("%.1f",powerDto.getCurrentCapacity()/powerDto.getMaxCapacity()*100)+"%");
+                item.addLabel("电池健康度", String.format("%.1f",powerDto.getMaxCapacity()/powerDto.getDesignCapacity()*100)+"%");
                 item.addLabel("电池性质", powerDto.getChemistry());
                 item.updateUI();
             }
