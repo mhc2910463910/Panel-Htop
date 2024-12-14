@@ -1,4 +1,4 @@
-package org.lzmhc.component;
+package org.lzmhc.component.generalPanel;
 
 import com.alibaba.fastjson.JSONArray;
 import org.lzmhc.dto.*;

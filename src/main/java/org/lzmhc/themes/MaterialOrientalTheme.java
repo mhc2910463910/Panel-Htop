@@ -27,7 +27,7 @@ public class MaterialOrientalTheme extends MaterialLiteTheme {
     @Override
     protected void installColor() {
         super.installColor();
-        this.textColor=new ColorUIResource(Color.green);
+        this.textColor=new ColorUIResource(Color.decode("#00adb5"));
     }
     @Override
     protected void installBorders() {

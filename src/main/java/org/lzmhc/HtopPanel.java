@@ -3,7 +3,8 @@ package org.lzmhc;
 import javax.swing.*;
 
 import mdlaf.MaterialLookAndFeel;
-import org.lzmhc.component.Panel1;
+import org.lzmhc.component.aboutPanel.AboutPanel;
+import org.lzmhc.component.generalPanel.Panel1;
 import org.lzmhc.themes.MaterialOrientalTheme;
 
 /**
@@ -23,6 +24,7 @@ public class HtopPanel extends JFrame {
         JPanel panel_5 = new JPanel();
         JPanel panel_6 = new JPanel();
         JPanel panel_7 = new JPanel();
+        JPanel panel_8 = new AboutPanel();
 
         JTabbedPane tabbedPane = new JTabbedPane();
         tabbedPane.addTab("概览",panel_1);
@@ -32,6 +34,7 @@ public class HtopPanel extends JFrame {
         tabbedPane.addTab("操作系统",panel_5);
         tabbedPane.addTab("显卡",panel_6);
         tabbedPane.addTab("电源",panel_7);
+        tabbedPane.addTab("关于",panel_8);
         add(tabbedPane);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     }
