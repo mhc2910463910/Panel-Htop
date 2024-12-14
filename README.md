@@ -15,4 +15,6 @@
 
 ##### 截图
 
-![](screen/htoppanel.jpg)
+![](screen/linux.jpg)
+
+![](screen/windows.png)
