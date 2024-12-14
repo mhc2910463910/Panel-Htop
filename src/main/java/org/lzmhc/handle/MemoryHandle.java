@@ -29,7 +29,7 @@ public class MemoryHandle extends Thread implements InfoBuild{
         globalMemoryDto.setTotalMemory(String.format("%.2f", total)+" GB");
         double used = total-availabel;
         globalMemoryDto.setUsedMemory(String.format("%.2f", used)+" GB");
-        double percentage = Double.parseDouble(String.format("%.2f",used/total));
+        double percentage = Double.parseDouble(String.format("%.2f",used/total*100));
         globalMemoryDto.setPercentage(percentage);
         double virtualUsedMemory=memory.getVirtualMemory().getSwapUsed()/1024.0/1024.0;
         if(virtualUsedMemory > 999){
