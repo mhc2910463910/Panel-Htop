@@ -5,6 +5,7 @@ import javax.swing.*;
 import mdlaf.MaterialLookAndFeel;
 import org.lzmhc.component.aboutPanel.AboutPanel;
 import org.lzmhc.component.generalPanel.Panel1;
+import org.lzmhc.component.processorPanel.ProcessorPanel;
 import org.lzmhc.themes.MaterialOrientalTheme;
 
 /**
@@ -18,7 +19,7 @@ public class HtopPanel extends JFrame {
         setTitle("简易的系统监视面板");
         setSize(1080,720);
         JPanel panel_1 = new Panel1();
-        JPanel panel_2 = new JPanel();
+        JPanel panel_2 = new ProcessorPanel((Panel1) panel_1);
         JPanel panel_3 = new JPanel();
         JPanel panel_4 = new JPanel();
         JPanel panel_5 = new JPanel();

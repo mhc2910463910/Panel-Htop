@@ -38,7 +38,7 @@ public class Panel1 extends JPanel{
     /**
      * 处理器
      */
-    private JPanel processPane1(){
+    public JPanel processPane1(){
         ImageIcon icon = new ImageIcon("img/cpu.png");
         PanelItem item=new PanelItem("处理器",new GridLayout(7,1), icon, color);
         CentralProcessor processor = systemInfo.getHardware().getProcessor();
