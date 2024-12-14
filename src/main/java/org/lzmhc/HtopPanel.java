@@ -6,6 +6,8 @@ import mdlaf.MaterialLookAndFeel;
 import org.lzmhc.component.Panel1;
 import org.lzmhc.themes.MaterialOrientalTheme;
 
+import java.awt.*;
+
 /**
  * Hello world!
  */
@@ -14,7 +16,7 @@ public class HtopPanel extends JFrame {
         initPanel();
     }
     public void initPanel(){
-        setTitle("简易的监控面板");
+        setTitle("简易的系统监视面板");
         setSize(1080,720);
         JPanel panel_1 = new Panel1();
         JPanel panel_2 = new JPanel();
