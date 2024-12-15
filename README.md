@@ -2,19 +2,27 @@
 
 ##### 简介
 
-类似htop命令的一款可视化系统信息面板。图形界面使用Swing开发，UI库使用Material-UI-Swing设计。
+使用OSHI模块和FlatLaf开发的一款可视化系统信息面板。
 
 ##### 文档
 
 - [OSHI文档](https://github.com/oshi/oshi)
-- [Material-UI-Swing文档](https://github.com/vincenzopalazzo/material-ui-swing)
+- [FlatLaf - Flat Look and Feel](https://github.com/JFormDesigner/FlatLaf)
 
 ##### 网页版
 
 - [WebHtop](https://github.com/mhc2910463910/Web-Htop)
 
-##### 截图
+##### 部分截图
 
-![](screen/linux.jpg)
+![](screen/01.jpg)
 
-![](screen/windows.png)
+![](screen/02.jpg)
+
+##### 更多工具
+
+- [MooInfo](https://github.com/rememberber/MooInfo)
+
+##### 注意事项
+
+> 在运行第一版jar包时，请将压缩包中的img和font目录放置在jar包同目录
