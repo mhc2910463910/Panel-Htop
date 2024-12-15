@@ -1,5 +1,7 @@
 package org.lzmhc.panel.component;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.lzmhc.dto.ProcessorDto;
 import org.lzmhc.dto.factory.InfoFactory;
 import org.lzmhc.dto.singleton.InfoDtoSingleton;
@@ -11,10 +13,11 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.concurrent.CountDownLatch;
-
+@Getter
+@Setter
 public class ProcessorPanel extends JPanel implements GetPanel{
-    private CentralProcessor processor = InfoDtoSingleton.getInfoDto().getHardware().getProcessor();
-    private ProcessorDto processorDto = InfoFactory.createDto(ProcessorDto.class);
+    protected CentralProcessor processor = InfoDtoSingleton.getInfoDto().getHardware().getProcessor();
+    protected ProcessorDto processorDto = InfoFactory.createDto(ProcessorDto.class);
 //    public ProcessorPanel(){
 //        this.getPanel();
 //    }

@@ -3,6 +3,7 @@ package org.lzmhc.panel.component;
 import lombok.Getter;
 import lombok.Setter;
 import org.lzmhc.dto.ItemInterface.InfoItem;
+import org.lzmhc.utils.FontUtil;
 
 import javax.swing.*;
 import java.awt.*;
@@ -11,10 +12,10 @@ import java.awt.*;
 @Setter
 public class PanelItem extends JPanel {
     private String title;
-    private InfoItem infoItem;
     private JLabel labelTitle;
     public PanelItem(String title, LayoutManager layoutManager, ImageIcon icon){
         this.title=title;
+        this.setBackground(Color.decode("#20403f"));
         this.setLayout(layoutManager);
         this.addLabelIcon(icon);
     }

@@ -55,12 +55,12 @@
     <dependency>
       <groupId>com.formdev</groupId>
       <artifactId>flatlaf</artifactId>
-      <version>1.0</version>
+      <version>3.5.4</version>
     </dependency>
     <dependency>
       <groupId>com.formdev</groupId>
       <artifactId>flatlaf-intellij-themes</artifactId>
-      <version>1.0</version>
+      <version>3.5.4</version>
     </dependency>
     <!--        OSHI 是一个免费的基于 JNA 的（原生）Java 操作系统和硬件信息库。-->
     <dependency>

@@ -3,10 +3,19 @@ package org.lzmhc;
 import javax.swing.*;
 
 import com.formdev.flatlaf.FlatDarkLaf;
+import com.formdev.flatlaf.FlatLaf;
 import com.formdev.flatlaf.intellijthemes.FlatGradiantoNatureGreenIJTheme;
+import com.formdev.flatlaf.intellijthemes.FlatMaterialDesignDarkIJTheme;
+import com.formdev.flatlaf.intellijthemes.FlatSolarizedDarkIJTheme;
+import com.formdev.flatlaf.intellijthemes.materialthemeuilite.FlatMaterialOceanicIJTheme;
+import com.formdev.flatlaf.intellijthemes.materialthemeuilite.FlatMoonlightIJTheme;
+import org.lzmhc.dto.factory.InfoFactory;
+import org.lzmhc.dto.singleton.InfoDtoSingleton;
 import org.lzmhc.panel.*;
 import org.lzmhc.panel.component.GetPanel;
+import org.lzmhc.panel.component.PanelItem;
 import org.lzmhc.panel.generalPanel.PanelIndex;
+import org.lzmhc.utils.FontUtil;
 
 import java.awt.*;
 
@@ -21,14 +30,13 @@ public class HtopPanel extends JFrame {
         setTitle("简易的系统监视面板");
         setSize(1080,720);
         PanelIndex panel_index = new PanelIndex();
-        JPanel panel_1 = new ProcessorTab(panel_index.getProcessorPanel());
-        JPanel panel_2 = new MemoryTab(panel_index.getMemoryPanel());
-        JPanel panel_3 = new StorageTab(panel_index.getStoragePanel());
-        JPanel panel_4 = new OperatingSystemTab(panel_index.getOperatingSystemPanel());
-        JPanel panel_5 = new GraphicsTab(panel_index.getGraphicsPanel());
-        JPanel panel_6 = new PowTab(panel_index.getPowPanel());
+        JPanel panel_1 = new ProcessorTab("img/cpu.png");
+        JPanel panel_2 = new MemoryTab("img/ram.png");
+        JPanel panel_3 = new StorageTab( "img/ssd.png");
+        JPanel panel_4 = new OperatingSystemTab(InfoDtoSingleton.getInfoDto().getOperatingSystem().getFamily().toLowerCase().equals("windows")?"img/windows.png":"img/linux.png");
+        JPanel panel_5 = new GraphicsTab( "img/graphics.png");
+        JPanel panel_6 = new PowTab("img/pow.png");
         JPanel panel_7 = new AboutTab();
-
         JTabbedPane tabbedPane = new JTabbedPane();
         tabbedPane.addTab("概览",panel_index);
         tabbedPane.addTab("处理器",panel_1);
@@ -39,21 +47,27 @@ public class HtopPanel extends JFrame {
         tabbedPane.addTab("电源",panel_6);
         tabbedPane.addTab("关于",panel_7);
         add(tabbedPane);
+        this.setResizable(false);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     }
 
     public static void main(String[] args) {
-        UIManager.put("TabbedPane.selectedBackground", Color.decode("#355c7d"));
-//        UIManager.put("Panel.background", Color.decode("#355c7d"));
-        FlatDarkLaf.registerCustomDefaultsSource( "org.lzmhc.theme");
-        FlatDarkLaf.install();
-        FlatGradiantoNatureGreenIJTheme.install();
-//        FlatMaterialDesignDarkIJTheme.install();
-//        FlatSolarizedDarkIJTheme
-//        FlatMaterialOceanicIJTheme
-//        FlatMoonlightIJTheme
-//        FlatSolarizedDarkIJTheme
+//        FlatLaf.registerCustomDefaultsSource( "org.lzmhc.themes");
+        Font sunfont= FontUtil.loadFont("font/sun.ttf", 20f);
+        Font font= FontUtil.loadFont("font/AaBanRuoKaiShuJiaCu-2.ttf", 20f);
+        UIManager.put("TabbedPane.showTabSeparators", true);
+        UIManager.put("TabbedPane.tabSeparatorsFullHeight", true);
+        UIManager.put("TabbedPane.tabWidthMode", "equal");
+        UIManager.put("TabbedPane.font", sunfont);
+        UIManager.put("Label.font", font);
+        FlatSolarizedDarkIJTheme.setup();
         JFrame htopPanel=new HtopPanel();
         htopPanel.setVisible(true);
+//        FlatMaterialDesignDarkIJTheme.install();
+//        FlatSolarizedDarkIJTheme.install();
+//        FlatMaterialOceanicIJTheme.install();
+//        FlatMoonlightIJTheme.install();
+//        FlatSolarizedDarkIJTheme.install();
+
     }
 }

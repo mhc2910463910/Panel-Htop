@@ -1,5 +1,7 @@
 package org.lzmhc.panel;
 
+import org.lzmhc.utils.IconUtil;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
@@ -8,15 +10,14 @@ import java.net.URI;
 
 public class AboutTab extends JPanel{
     public AboutTab(){
+        JLabel title = new JLabel(IconUtil.loadIcon(new ImageIcon("img/cpu.png"),256));
         JLabel label=new JLabel("此项目是一款功能类似htop命令的可视化系统信息面板。");
-        JLabel label1 = new JLabel("This project is a visual system information panel with functions similar to the HTOP command.");
         label.setHorizontalAlignment(SwingConstants.CENTER);
-        label1.setHorizontalAlignment(SwingConstants.CENTER);
         ImageIcon icon = new ImageIcon("img/github-mark.png");
         Image image = icon.getImage();
         Image scaleImg = image.getScaledInstance(64,64,Image.SCALE_SMOOTH);
         ImageIcon scaleImage = new ImageIcon(scaleImg);
-        JLabel btnlabel=new JLabel( "release",scaleImage,0);
+        JLabel btnlabel=new JLabel( scaleImage,0);
         btnlabel.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -33,13 +34,10 @@ public class AboutTab extends JPanel{
                 }
             }
         });
-        LayoutManager Layout=new GridLayout(6,1);
+        LayoutManager Layout=new GridLayout(3,1);
         this.setLayout(Layout);
+        this.add(title);
         this.add(label);
-        this.add(label1);
-        this.add(new JLabel());
-        this.add(new JLabel());
-        this.add(new JLabel());
         this.add(btnlabel);
     }
 }
