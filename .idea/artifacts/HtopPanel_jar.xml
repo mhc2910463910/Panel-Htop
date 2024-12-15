@@ -1,0 +1,25 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="HtopPanel:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/HtopPanel_jar</output-path>
+    <root id="archive" name="HtopPanel.jar">
+      <element id="directory" name="META-INF">
+        <element id="file-copy" path="$PROJECT_DIR$/src/META-INF/MANIFEST.MF" />
+      </element>
+      <element id="module-output" name="HtopPanel" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/com/github/oshi/oshi-core/5.3.6/oshi-core-5.3.6.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/com/formdev/flatlaf-intellij-themes/3.5.4/flatlaf-intellij-themes-3.5.4.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/net/java/dev/jna/jna-platform/5.6.0/jna-platform-5.6.0.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/com/formdev/flatlaf/3.5.4/flatlaf-3.5.4.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/slf4j/slf4j-api/1.7.30/slf4j-api-1.7.30.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/com/alibaba/fastjson/1.2.51/fastjson-1.2.51.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/net/java/dev/jna/jna/5.6.0/jna-5.6.0.jar" path-in-jar="/" />
+      <element id="library" level="project" name="Maven: com.formdev:flatlaf:3.5.4" />
+      <element id="library" level="project" name="Maven: com.formdev:flatlaf-intellij-themes:3.5.4" />
+      <element id="library" level="project" name="Maven: com.github.oshi:oshi-core:5.3.6" />
+      <element id="library" level="project" name="Maven: org.slf4j:slf4j-api:1.7.30" />
+      <element id="library" level="project" name="Maven: net.java.dev.jna:jna:5.6.0" />
+      <element id="library" level="project" name="Maven: net.java.dev.jna:jna-platform:5.6.0" />
+      <element id="library" level="project" name="Maven: com.alibaba:fastjson:1.2.51" />
+    </root>
+  </artifact>
+</component>
