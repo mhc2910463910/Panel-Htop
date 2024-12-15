@@ -10,8 +10,8 @@ import java.net.URI;
 
 public class AboutTab extends JPanel{
     public AboutTab(){
-        JLabel title = new JLabel(IconUtil.loadIcon(new ImageIcon("img/cpu.png"),256));
-        JLabel label=new JLabel("此项目是一款功能类似htop命令的可视化系统信息面板。");
+        JLabel title = new JLabel(IconUtil.loadIcon(new ImageIcon("img/java.png"),256));
+        JLabel label=new JLabel("此项目是一款功能类似htop命令的可视化系统信息面板。（累了就来一杯咖啡吧！）");
         label.setHorizontalAlignment(SwingConstants.CENTER);
         ImageIcon icon = new ImageIcon("img/github-mark.png");
         JLabel btnlabel=new JLabel(IconUtil.loadIcon(new ImageIcon("img/github-mark.png"),64),0);

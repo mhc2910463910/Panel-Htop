@@ -2,18 +2,9 @@ package org.lzmhc;
 
 import javax.swing.*;
 
-import com.formdev.flatlaf.FlatDarkLaf;
-import com.formdev.flatlaf.FlatLaf;
-import com.formdev.flatlaf.intellijthemes.FlatGradiantoNatureGreenIJTheme;
-import com.formdev.flatlaf.intellijthemes.FlatMaterialDesignDarkIJTheme;
 import com.formdev.flatlaf.intellijthemes.FlatSolarizedDarkIJTheme;
-import com.formdev.flatlaf.intellijthemes.materialthemeuilite.FlatMaterialOceanicIJTheme;
-import com.formdev.flatlaf.intellijthemes.materialthemeuilite.FlatMoonlightIJTheme;
-import org.lzmhc.dto.factory.InfoFactory;
 import org.lzmhc.dto.singleton.InfoDtoSingleton;
 import org.lzmhc.panel.*;
-import org.lzmhc.panel.component.GetPanel;
-import org.lzmhc.panel.component.PanelItem;
 import org.lzmhc.panel.generalPanel.PanelIndex;
 import org.lzmhc.utils.FontUtil;
 
@@ -47,7 +38,7 @@ public class HtopPanel extends JFrame {
         tabbedPane.addTab("电源",panel_6);
         tabbedPane.addTab("关于",panel_7);
         add(tabbedPane);
-        this.setResizable(false);
+//        this.setResizable(false);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     }
 
@@ -60,6 +51,8 @@ public class HtopPanel extends JFrame {
         UIManager.put("TabbedPane.tabWidthMode", "equal");
         UIManager.put("TabbedPane.font", sunfont);
         UIManager.put("Label.font", font);
+        UIManager.put("Label.foreground", Color.decode("#1fab89"));
+        UIManager.put("TextField.foreground", Color.green);
         FlatSolarizedDarkIJTheme.setup();
         JFrame htopPanel=new HtopPanel();
         htopPanel.setVisible(true);

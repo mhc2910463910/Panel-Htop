@@ -18,13 +18,9 @@ import java.util.concurrent.CountDownLatch;
 public class ProcessorPanel extends JPanel implements GetPanel{
     protected CentralProcessor processor = InfoDtoSingleton.getInfoDto().getHardware().getProcessor();
     protected ProcessorDto processorDto = InfoFactory.createDto(ProcessorDto.class);
-//    public ProcessorPanel(){
-//        this.getPanel();
-//    }
     public JPanel getPanel(){
         ImageIcon icon = new ImageIcon("img/cpu.png");
         PanelItem item=new PanelItem("处理器",new GridLayout(7,1), icon);
-        //item.putClientProperty("JComponent.background",Color.decode("#53354a"));
         CountDownLatch latch = new CountDownLatch(numThreads);
         Thread thread = new ProcessorHandle(processorDto, processor,latch);
         thread.start();

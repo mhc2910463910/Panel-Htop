@@ -13,8 +13,8 @@ import java.awt.event.ActionListener;
 import java.util.concurrent.CountDownLatch;
 
 public class MemoryPanel extends JPanel implements GetPanel{
-    private GlobalMemory globalMemory = InfoDtoSingleton.getInfoDto().getHardware().getMemory();
-    private GlobalMemoryDto globalMemoryDto = InfoFactory.createDto(GlobalMemoryDto.class);
+    protected GlobalMemory globalMemory = InfoDtoSingleton.getInfoDto().getHardware().getMemory();
+    protected GlobalMemoryDto globalMemoryDto = InfoFactory.createDto(GlobalMemoryDto.class);
     @Override
     public JPanel getPanel(){
         ImageIcon icon = new ImageIcon("img/ram.png");

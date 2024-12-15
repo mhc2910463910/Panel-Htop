@@ -23,8 +23,6 @@ public class PanelIndex extends JPanel{
      */
     public PanelIndex(){
         GridLayout gridLayout = new GridLayout(2,3);
-        gridLayout.setHgap(2);
-        gridLayout.setVgap(2);
         setLayout(gridLayout);
         this.add(processorPanel.getPanel());
         this.add(memoryPanel.getPanel());

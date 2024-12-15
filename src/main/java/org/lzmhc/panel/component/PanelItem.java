@@ -15,7 +15,6 @@ public class PanelItem extends JPanel {
     private JLabel labelTitle;
     public PanelItem(String title, LayoutManager layoutManager, ImageIcon icon){
         this.title=title;
-        this.setBackground(Color.decode("#20403f"));
         this.setLayout(layoutManager);
         this.addLabelIcon(icon);
     }
@@ -32,7 +31,7 @@ public class PanelItem extends JPanel {
         this.add(label);
     }
     public void addLabel(String name, String value){
-        JLabel label=new JLabel(name+" : "+value);
+        JLabel label=new JLabel(name+": "+value);
         this.add(label);
     }
 }
