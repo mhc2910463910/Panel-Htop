@@ -1,16 +1,13 @@
-package org.lzmhc.component.aboutPanel;
+package org.lzmhc.panel;
 
 import javax.swing.*;
-import javax.swing.border.Border;
-import javax.swing.plaf.BorderUIResource;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.net.URI;
 
-public class AboutPanel extends JPanel{
-    public AboutPanel(){
+public class AboutTab extends JPanel{
+    public AboutTab(){
         JLabel label=new JLabel("此项目是一款功能类似htop命令的可视化系统信息面板。");
         JLabel label1 = new JLabel("This project is a visual system information panel with functions similar to the HTOP command.");
         label.setHorizontalAlignment(SwingConstants.CENTER);

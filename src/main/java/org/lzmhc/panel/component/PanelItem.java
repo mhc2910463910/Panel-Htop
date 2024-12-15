@@ -1,4 +1,4 @@
-package org.lzmhc.component.generalPanel;
+package org.lzmhc.panel.component;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -13,11 +13,10 @@ public class PanelItem extends JPanel {
     private String title;
     private InfoItem infoItem;
     private JLabel labelTitle;
-    public PanelItem(String title, LayoutManager layoutManager, ImageIcon icon, String color){
+    public PanelItem(String title, LayoutManager layoutManager, ImageIcon icon){
         this.title=title;
         this.setLayout(layoutManager);
         this.addLabelIcon(icon);
-        this.setBackground(Color.decode(color));
     }
     public void addLabelIcon(ImageIcon icon){
         Image image = icon.getImage();
