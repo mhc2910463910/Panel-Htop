@@ -1,32 +1,22 @@
-package org.lzmhc.component;
+package org.lzmhc.panel.component;
 
 import lombok.Getter;
 import lombok.Setter;
-import mdlaf.components.panel.MaterialPanelUI;
-import org.jb2011.lnf.beautyeye.widget.border.BEDashedRoundRecBorder;
-import org.jb2011.lnf.beautyeye.widget.border.BERoundBorder;
-import org.jb2011.lnf.beautyeye.widget.border.BEShadowBorder;
-import org.jb2011.lnf.beautyeye.widget.border.BEShadowBorder3;
 import org.lzmhc.dto.ItemInterface.InfoItem;
-import sun.swing.ImageIconUIResource;
+import org.lzmhc.utils.FontUtil;
 
 import javax.swing.*;
-import javax.swing.border.Border;
 import java.awt.*;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Map;
+
 @Getter
 @Setter
 public class PanelItem extends JPanel {
     private String title;
-    private InfoItem infoItem;
     private JLabel labelTitle;
-    public PanelItem(String title, LayoutManager layoutManager, ImageIcon icon, String color){
+    public PanelItem(String title, LayoutManager layoutManager, ImageIcon icon){
         this.title=title;
         this.setLayout(layoutManager);
         this.addLabelIcon(icon);
-        this.setBackground(Color.decode(color));
     }
     public void addLabelIcon(ImageIcon icon){
         Image image = icon.getImage();
@@ -41,7 +31,7 @@ public class PanelItem extends JPanel {
         this.add(label);
     }
     public void addLabel(String name, String value){
-        JLabel label=new JLabel(name+" : "+value);
+        JLabel label=new JLabel(name+": "+value);
         this.add(label);
     }
 }

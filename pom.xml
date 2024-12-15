@@ -40,19 +40,28 @@
       <scope>test</scope>
     </dependency>
     <!--    beautyeye-->
+<!--    <dependency>-->
+<!--      <groupId>beautyeye_lnf</groupId>-->
+<!--      <artifactId>beautyeye_lnf</artifactId>-->
+<!--      <scope>system</scope>-->
+<!--      <version>3.7</version>-->
+<!--      <systemPath>${project.basedir}/src/main/resources/lib/beautyeye_lnf.jar</systemPath>-->
+<!--    </dependency>-->
+<!--    <dependency>-->
+<!--      <groupId>io.github.vincenzopalazzo</groupId>-->
+<!--      <artifactId>material-ui-swing</artifactId>-->
+<!--      <version>1.1.2</version>-->
+<!--    </dependency>-->
     <dependency>
-      <groupId>beautyeye_lnf</groupId>
-      <artifactId>beautyeye_lnf</artifactId>
-      <scope>system</scope>
-      <version>3.7</version>
-      <systemPath>${project.basedir}/src/main/resources/lib/beautyeye_lnf.jar</systemPath>
+      <groupId>com.formdev</groupId>
+      <artifactId>flatlaf</artifactId>
+      <version>3.5.4</version>
     </dependency>
     <dependency>
-      <groupId>io.github.vincenzopalazzo</groupId>
-      <artifactId>material-ui-swing</artifactId>
-      <version>1.1.2</version>
+      <groupId>com.formdev</groupId>
+      <artifactId>flatlaf-intellij-themes</artifactId>
+      <version>3.5.4</version>
     </dependency>
-
     <!--        OSHI 是一个免费的基于 JNA 的（原生）Java 操作系统和硬件信息库。-->
     <dependency>
       <groupId>com.github.oshi</groupId>
