@@ -13,8 +13,8 @@ import java.awt.event.ActionListener;
 import java.util.concurrent.CountDownLatch;
 
 public class StoragePanel extends JPanel implements GetPanel{
-    java.util.List<HWDiskStore> diskStores = InfoDtoSingleton.getInfoDto().getHardware().getDiskStores();
-    StorageDto storageDto = InfoFactory.createDto(StorageDto.class);
+    protected java.util.List<HWDiskStore> diskStores = InfoDtoSingleton.getInfoDto().getHardware().getDiskStores();
+    protected StorageDto storageDto = InfoFactory.createDto(StorageDto.class);
     @Override
     public JPanel getPanel(){
         ImageIcon icon=new ImageIcon("img/ssd.png");
@@ -30,7 +30,7 @@ public class StoragePanel extends JPanel implements GetPanel{
         item.addLabel("I/O", storageDto.getUsedRate()+"%");
         item.addLabel("磁盘类型", storageDto.getMainStorage());
         item.addLabel("磁盘容量", storageDto.getTotal());
-        Timer time = new Timer(1000, new ActionListener() {
+        Timer time = new Timer(5000, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Thread thread = new StorageHandle(storageDto, diskStores,latch);

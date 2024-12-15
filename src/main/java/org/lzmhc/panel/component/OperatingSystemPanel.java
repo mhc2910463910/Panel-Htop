@@ -11,8 +11,8 @@ import java.awt.*;
 import java.util.concurrent.CountDownLatch;
 
 public class OperatingSystemPanel extends JPanel implements GetPanel{
-    OperatingSystem operatingSystem = InfoDtoSingleton.getInfoDto().getOperatingSystem();
-    OperatingSystemDto operatingSystemDto= InfoFactory.createDto(OperatingSystemDto.class);
+    protected OperatingSystem operatingSystem = InfoDtoSingleton.getInfoDto().getOperatingSystem();
+    protected OperatingSystemDto operatingSystemDto= InfoFactory.createDto(OperatingSystemDto.class);
     @Override
     public JPanel getPanel(){
         ImageIcon icon = null;

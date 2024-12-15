@@ -11,8 +11,8 @@ import java.awt.*;
 import java.util.concurrent.CountDownLatch;
 
 public class GraphicsPanel extends JPanel implements GetPanel{
-    java.util.List<GraphicsCard> graphicsCards = InfoDtoSingleton.getInfoDto().getHardware().getGraphicsCards();
-    GraphicsCardDto graphicsCardDto = InfoFactory.createDto(GraphicsCardDto.class);
+    protected java.util.List<GraphicsCard> graphicsCards = InfoDtoSingleton.getInfoDto().getHardware().getGraphicsCards();
+    protected GraphicsCardDto graphicsCardDto = InfoFactory.createDto(GraphicsCardDto.class);
     @Override
     public JPanel getPanel(){
         ImageIcon icon = new ImageIcon("img/graphics.png");

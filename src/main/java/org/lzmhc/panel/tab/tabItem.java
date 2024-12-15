@@ -1,4 +1,4 @@
-package org.lzmhc.panel;
+package org.lzmhc.panel.tab;
 
 import javax.swing.*;
 import java.awt.*;

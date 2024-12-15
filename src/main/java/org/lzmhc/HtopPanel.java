@@ -4,8 +4,8 @@ import javax.swing.*;
 
 import com.formdev.flatlaf.intellijthemes.FlatSolarizedDarkIJTheme;
 import org.lzmhc.dto.singleton.InfoDtoSingleton;
-import org.lzmhc.panel.*;
 import org.lzmhc.panel.generalPanel.PanelIndex;
+import org.lzmhc.panel.tab.*;
 import org.lzmhc.utils.FontUtil;
 
 import java.awt.*;

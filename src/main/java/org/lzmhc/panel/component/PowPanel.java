@@ -13,8 +13,8 @@ import java.awt.event.ActionListener;
 import java.util.concurrent.CountDownLatch;
 
 public class PowPanel extends JPanel implements GetPanel{
-    PowerDto powerDto= InfoFactory.createDto(PowerDto.class);
-    java.util.List<PowerSource> powerSources = InfoDtoSingleton.getInfoDto().getHardware().getPowerSources();
+    protected PowerDto powerDto= InfoFactory.createDto(PowerDto.class);
+    protected java.util.List<PowerSource> powerSources = InfoDtoSingleton.getInfoDto().getHardware().getPowerSources();
     @Override
     public JPanel getPanel(){
         ImageIcon icon=new ImageIcon("img/pow.png");
@@ -32,7 +32,7 @@ public class PowPanel extends JPanel implements GetPanel{
         item.addLabel("当前电量", String.format("%.1f",powerDto.getCurrentCapacity()/powerDto.getMaxCapacity()));
         item.addLabel("电池健康度", String.format("%.1f",powerDto.getMaxCapacity()/powerDto.getDesignCapacity()));
         item.addLabel("电池性质", powerDto.getChemistry());
-        Timer time = new Timer(1000, new ActionListener() {
+        Timer time = new Timer(5000, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Thread thread = new PowHandle(powerDto, powerSources,latch);

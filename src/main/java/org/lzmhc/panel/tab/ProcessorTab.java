@@ -1,9 +1,7 @@
-package org.lzmhc.panel;
+package org.lzmhc.panel.tab;
 
-import org.lzmhc.handle.MemoryHandle;
 import org.lzmhc.handle.ProcessorHandle;
-import org.lzmhc.panel.component.GetPanel;
-import org.lzmhc.panel.component.MemoryPanel;
+import org.lzmhc.panel.component.ProcessorPanel;
 import org.lzmhc.utils.IconUtil;
 
 import javax.swing.*;
@@ -12,9 +10,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.concurrent.CountDownLatch;
 
-public class MemoryTab extends MemoryPanel implements templateTab {
+public class ProcessorTab extends ProcessorPanel implements templateTab {
     private ImageIcon icon;
-    public MemoryTab(String path) {
+    public ProcessorTab(String path){
         JPanel iconPanel=new JPanel();
         this.icon = IconUtil.loadIcon(new ImageIcon(path), 128);
         JLabel label = new JLabel( this.icon);
@@ -33,7 +31,7 @@ public class MemoryTab extends MemoryPanel implements templateTab {
         Timer time = new Timer(1000, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Thread thread = new MemoryHandle(globalMemoryDto,globalMemory ,latch);
+                Thread thread = new ProcessorHandle(processorDto, processor,latch);
                 thread.start();
                 try {
                     latch.await();
@@ -41,14 +39,13 @@ public class MemoryTab extends MemoryPanel implements templateTab {
                     err.printStackTrace();
                 }
                 panel.removeAll();
-                panel.add(new tabItem("使用率", globalMemoryDto.getPercentage()+"%"));
-                panel.add(new tabItem("物理内存", globalMemoryDto.getTotalMemory()));
-                panel.add(new tabItem("已使用", globalMemoryDto.getUsedMemory()));
-                panel.add(new tabItem("可用", globalMemoryDto.getAvailableMemory()));
-                panel.add(new tabItem("虚拟内存", globalMemoryDto.getVirtualUsedMemory()));
-                panel.add(new tabItem("已使用", globalMemoryDto.getVirtualUsedMemory()));
-                panel.add(new tabItem("可用", globalMemoryDto.getVirtuallMemory()));
-                panel.add(new tabItem("内存类型 or bit",globalMemoryDto.getRamTypeOrOsBitDepth()));
+                panel.add(new tabItem("利用率",processorDto.getUsedRate() + "%"));
+                panel.add(new tabItem("CPU电压", processorDto.getSensorsVoltage()));
+                panel.add(new tabItem("CPU温度", processorDto.getSensoresTemperature()));
+                panel.add(new tabItem("处理器", processorDto.getName()));
+                panel.add(new tabItem("当前频率", processorDto.getCurrentFreq()));
+                panel.add(new tabItem("最大频率", processorDto.getMaxFreq()));
+                panel.add(new tabItem("风扇速度", ((processorDto.getSensoresSpeedList().size()>0) ? processorDto.getSensoresSpeedList().get(0) : "0")));
                 updateUI();
             }
         });

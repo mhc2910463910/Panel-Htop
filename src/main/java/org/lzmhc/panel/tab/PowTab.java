@@ -1,8 +1,8 @@
-package org.lzmhc.panel;
+package org.lzmhc.panel.tab;
 
+import org.lzmhc.handle.PowHandle;
 import org.lzmhc.handle.ProcessorHandle;
-import org.lzmhc.panel.component.GetPanel;
-import org.lzmhc.panel.component.ProcessorPanel;
+import org.lzmhc.panel.component.PowPanel;
 import org.lzmhc.utils.IconUtil;
 
 import javax.swing.*;
@@ -11,9 +11,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.concurrent.CountDownLatch;
 
-public class ProcessorTab extends ProcessorPanel implements templateTab {
+public class PowTab extends PowPanel implements templateTab {
     private ImageIcon icon;
-    public ProcessorTab(String path){
+    public PowTab(String path) {
         JPanel iconPanel=new JPanel();
         this.icon = IconUtil.loadIcon(new ImageIcon(path), 128);
         JLabel label = new JLabel( this.icon);
@@ -24,15 +24,15 @@ public class ProcessorTab extends ProcessorPanel implements templateTab {
         this.add(getPanel(), BorderLayout.CENTER);
     }
     @Override
-    public JPanel getPanel(){
+    public JPanel getPanel() {
         JPanel panel=new JPanel();
         LayoutManager layoutManager=new GridLayout(12,1);
         panel.setLayout(layoutManager);
         CountDownLatch latch = new CountDownLatch(numThreads);
-        Timer time = new Timer(1000, new ActionListener() {
+        Timer time = new Timer(5000, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Thread thread = new ProcessorHandle(processorDto, processor,latch);
+                Thread thread = new PowHandle(powerDto, powerSources,latch);
                 thread.start();
                 try {
                     latch.await();
@@ -40,13 +40,11 @@ public class ProcessorTab extends ProcessorPanel implements templateTab {
                     err.printStackTrace();
                 }
                 panel.removeAll();
-                panel.add(new tabItem("利用率",processorDto.getUsedRate() + "%"));
-                panel.add(new tabItem("CPU电压", processorDto.getSensorsVoltage()));
-                panel.add(new tabItem("CPU温度", processorDto.getSensoresTemperature()));
-                panel.add(new tabItem("处理器", processorDto.getName()));
-                panel.add(new tabItem("当前频率", processorDto.getCurrentFreq()));
-                panel.add(new tabItem("最大频率", processorDto.getMaxFreq()));
-                panel.add(new tabItem("风扇速度", ((processorDto.getSensoresSpeedList().size()>0) ? processorDto.getSensoresSpeedList().get(0) : "0")));
+                panel.add(new tabItem("设备名称",powerDto.getDeviceName()));
+                panel.add(new tabItem("电压", powerDto.getVoltage()));
+                panel.add(new tabItem("当前电量", String.format("%.1f",powerDto.getCurrentCapacity()/powerDto.getMaxCapacity()*100)+"%"));
+                panel.add(new tabItem("电池健康度", String.format("%.1f",powerDto.getMaxCapacity()/powerDto.getDesignCapacity()*100)+"%"));
+                panel.add(new tabItem("电池性质", powerDto.getChemistry()));
                 updateUI();
             }
         });
