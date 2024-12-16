@@ -8,6 +8,10 @@ import org.lzmhc.dto.singleton.InfoDtoSingleton;
 import oshi.SystemInfo;
 import oshi.hardware.CentralProcessor;
 import oshi.hardware.GraphicsCard;
+import oshi.software.os.FileSystem;
+import oshi.software.os.OSFileStore;
+import oshi.software.os.OSProcess;
+import oshi.software.os.OSSession;
 
 import java.util.List;
 
@@ -16,39 +20,50 @@ import java.util.List;
  */
 public class AppTest {
     private SystemInfo systemInfo = InfoDtoSingleton.getInfoDto();
+    @Test
+    public void getOperatingSystem(){
+        /**
+         * 文件系统
+         */
+//        FileSystem fileSystem = systemInfo.getOperatingSystem().getFileSystem();
+//        List<OSFileStore> fileStores = fileSystem.getFileStores();
+//        for(OSFileStore fileStore: fileStores){
+//            System.out.println(fileStore);
+//        }
+//        List<OSSession> sessions = systemInfo.getOperatingSystem().getSessions();
+//        for(OSSession osSession:sessions){
+//            System.out.println(osSession.getHost());
+//        }
+    }
     /**
      * Rigorous Test :-)
      */
-    @Test
-    public void getOperatingSystemInfo() {
-        /**
-         * 逻辑处理器
-         */
-        List<CentralProcessor.LogicalProcessor> logicalProcessors = systemInfo.getHardware().getProcessor().getLogicalProcessors();
-        for(CentralProcessor.LogicalProcessor logicalProcessor:logicalProcessors){
-            System.out.println("核心ID"+logicalProcessor.getPhysicalProcessorNumber());
-            System.out.println("逻辑处理器编号"+logicalProcessor.getProcessorNumber());
-        }
-        /**
-         * 物理处理器
-         */
-        List<CentralProcessor.PhysicalProcessor> physicalProcessors = systemInfo.getHardware().getProcessor().getPhysicalProcessors();
-        for(CentralProcessor.PhysicalProcessor physicalProcessor: physicalProcessors){
-            System.out.println("核心ID"+physicalProcessor.getPhysicalProcessorNumber());
-            System.out.println("平台特定标识"+physicalProcessor.getIdString().split(","));
-        }
-    }
-    @Test
-    public void getMemoryInfo(){
-        System.out.println("物理内存: "+systemInfo.getHardware().getMemory().getTotal());
-        System.out.println("可用物理内存: "+systemInfo.getHardware().getMemory().getAvailable());
-        System.out.println("已用物理内存: "+(systemInfo.getHardware().getMemory().getTotal()-systemInfo.getHardware().getMemory().getAvailable()));
-//        System.out.println("物理内存利用率: "+systemInfo.getGlobalMemory().getPercentage()+" %");
-//        System.out.println("虚拟内存: "+systemInfo.getGlobalMemory().getVirtuallMemory()+" GB");
-//        System.out.println("已用虚拟内存: "+systemInfo.getGlobalMemoryDto().getVirtualUsedMemory()+" GB");
-//        System.out.println("内存类型/位: "+systemInfo.getGlobalMemoryDto().getRamTypeOrOsBitDepth());
-//        System.out.println("进程数: "+systemInfo.getGlobalMemoryDto().getProcCount());
-    }
+//    @Test
+//    public void getOperatingSystemInfo() {
+//        /**
+//         * 逻辑处理器
+//         */
+//        List<CentralProcessor.LogicalProcessor> logicalProcessors = systemInfo.getHardware().getProcessor().getLogicalProcessors();
+//        for(CentralProcessor.LogicalProcessor logicalProcessor:logicalProcessors){
+//            System.out.println("核心ID"+logicalProcessor.getPhysicalProcessorNumber());
+//            System.out.println("逻辑处理器编号"+logicalProcessor.getProcessorNumber());
+//        }
+//        /**
+//         * 物理处理器
+//         */
+//        List<CentralProcessor.PhysicalProcessor> physicalProcessors = systemInfo.getHardware().getProcessor().getPhysicalProcessors();
+//        for(CentralProcessor.PhysicalProcessor physicalProcessor: physicalProcessors){
+//            System.out.println("核心ID"+physicalProcessor.getPhysicalProcessorNumber());
+//            System.out.println("平台特定标识"+physicalProcessor.getIdString().split(","));
+//        }
+//    }
+//    @Test
+//    public void getMemoryInfo(){
+//        System.out.println(systemInfo.getHardware().getMemory().getPhysicalMemory());
+//        System.out.println("物理内存: "+systemInfo.getHardware().getMemory().getTotal());
+//        System.out.println("可用物理内存: "+systemInfo.getHardware().getMemory().getAvailable());
+//        System.out.println("已用物理内存: "+(systemInfo.getHardware().getMemory().getTotal()-systemInfo.getHardware().getMemory().getAvailable()));
+//    }
 
 //    @Test
 //    public void getProcessorInfo(){
