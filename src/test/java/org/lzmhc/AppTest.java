@@ -8,6 +8,7 @@ import org.lzmhc.dto.singleton.InfoDtoSingleton;
 import oshi.SystemInfo;
 import oshi.hardware.CentralProcessor;
 import oshi.hardware.GraphicsCard;
+import oshi.hardware.HWDiskStore;
 import oshi.software.os.FileSystem;
 import oshi.software.os.OSFileStore;
 import oshi.software.os.OSProcess;
@@ -102,8 +103,20 @@ public class AppTest {
 //        System.out.println("电池性质: "+systemInfo.getPowerDto().getChemistry());
 //        System.out.println("电池制造商: "+systemInfo.getPowerDto().getManufacturer());
 //    }
-//    @Test
-//    public void getStorageInfo(){
+    @Test
+    public void getStorageInfo(){
+        List<HWDiskStore> diskStores = systemInfo.getHardware().getDiskStores();
+        for (HWDiskStore diskStore: diskStores){
+            System.out.println(diskStore.getModel());
+            System.out.println(diskStore.getName());
+            System.out.println(diskStore.getSize());
+//            System.out.println(diskStore.getPartitions());
+            System.out.println(diskStore.getReads());
+            System.out.println(diskStore.getReadBytes());
+//            System.out.println(diskStore.getCurrentQueueLength());
+            System.out.println(diskStore.getWrites());
+            System.out.println(diskStore.getWriteBytes());
+        }
 //        InfoDto systemInfo = (InfoDto) infoController.getInfo().getsystemInfo();
 //        List<StorageDto> storageDtoList = systemInfo.getStorageDtoList();
 //        for(StorageDto storageDto:storageDtoList) {
@@ -112,7 +125,7 @@ public class AppTest {
 //            System.out.println("磁盘空间: " + storageDto.getTotal());
 //            System.out.println("磁盘I/O率:" + storageDto.getUsedRate());
 //        }
-//    }
+    }
 //    @Test
 //    public void getGraphicsCardsInfo(){
 //        InfoDto systemInfo = (InfoDto) infoController.getInfo().getsystemInfo();

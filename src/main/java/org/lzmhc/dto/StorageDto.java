@@ -21,6 +21,22 @@ public class StorageDto implements InfoItem {
      */
     private String usedRate;
     /**
-     * 磁盘使用率
+     * 磁盘容量占比
+     */
+    private long readCount;
+    /**
+     * 读取次数
+     */
+    private long readbytes;
+    /**
+     * 读取字节数
+     */
+    private long writeCount;
+    /**
+     * 写入次数
+     */
+    private long writebytes;
+    /**
+     * 写入字节数
      */
 }
