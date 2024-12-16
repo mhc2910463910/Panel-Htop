@@ -23,6 +23,10 @@ public class GlobalMemoryDto implements InfoItem {
     /**
      * 已用虚拟内存
      */
+    private String availabelVirtualMemory;
+    /**
+     * 可用虚拟内存
+     */
     private String virtuallMemory;
     /**
      * 虚拟内存

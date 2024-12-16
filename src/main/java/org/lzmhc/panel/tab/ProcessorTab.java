@@ -40,12 +40,14 @@ public class ProcessorTab extends ProcessorPanel implements templateTab {
                 }
                 panel.removeAll();
                 panel.add(new tabItem("利用率",processorDto.getUsedRate() + "%"));
+                panel.add(new tabItem("处理器", processorDto.getName()));
+                panel.add(new tabItem("核心", processorDto.getCoreCount()+" 逻辑处理器"));
                 panel.add(new tabItem("CPU电压", processorDto.getSensorsVoltage()));
                 panel.add(new tabItem("CPU温度", processorDto.getSensoresTemperature()));
-                panel.add(new tabItem("处理器", processorDto.getName()));
                 panel.add(new tabItem("当前频率", processorDto.getCurrentFreq()));
                 panel.add(new tabItem("最大频率", processorDto.getMaxFreq()));
-                panel.add(new tabItem("风扇速度", ((processorDto.getSensoresSpeedList().size()>0) ? processorDto.getSensoresSpeedList().get(0) : "0")));
+                panel.add(new tabItem("bit", processorDto.getBitDepth()));
+                panel.add(new tabItem("风扇速度", ((processorDto.getSensoresSpeedList().size()>0) ? processorDto.getSensoresSpeedList().toString() : "0")));
                 updateUI();
             }
         });

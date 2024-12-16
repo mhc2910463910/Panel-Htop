@@ -38,6 +38,8 @@ public class MemoryHandle extends Thread implements InfoBuild{
         }else{
             globalMemoryDto.setVirtualUsedMemory(String.format("%.2f", virtualUsedMemory)+" MB");
         }
+        double availabelVirtualMemory = (memory.getVirtualMemory().getSwapTotal()-memory.getVirtualMemory().getSwapUsed())/1024.0/1024.0/1024.0;
+        globalMemoryDto.setAvailabelVirtualMemory(String.format("%.2f", availabelVirtualMemory)+" GB");
         double virtualMemory=memory.getVirtualMemory().getSwapTotal()/1024.0/1024.0/1024.0;
         globalMemoryDto.setVirtuallMemory(String.format("%.2f", virtualMemory)+" GB");
 

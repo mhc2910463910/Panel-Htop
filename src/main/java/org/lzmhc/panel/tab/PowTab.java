@@ -40,11 +40,16 @@ public class PowTab extends PowPanel implements templateTab {
                     err.printStackTrace();
                 }
                 panel.removeAll();
+                panel.add(new tabItem("电源名称",powerDto.getName()));
                 panel.add(new tabItem("设备名称",powerDto.getDeviceName()));
                 panel.add(new tabItem("电压", powerDto.getVoltage()));
                 panel.add(new tabItem("当前电量", String.format("%.1f",powerDto.getCurrentCapacity()/powerDto.getMaxCapacity()*100)+"%"));
                 panel.add(new tabItem("电池健康度", String.format("%.1f",powerDto.getMaxCapacity()/powerDto.getDesignCapacity()*100)+"%"));
+                panel.add(new tabItem("充电中", powerDto.isCharging()?"是":"否"));
+                panel.add(new tabItem("放电中", powerDto.isDischarging()?"是":"否"));
+                panel.add(new tabItem("接入电源", powerDto.isPowerOnLine()?"是":"否"));
                 panel.add(new tabItem("电池性质", powerDto.getChemistry()));
+                panel.add(new tabItem("制造商", powerDto.getManufacturer()));
                 updateUI();
             }
         });

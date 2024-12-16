@@ -43,6 +43,7 @@ public class StorageTab extends StoragePanel implements templateTab {
                 panel.add(new tabItem("磁盘I/O",storageDto.getUsedRate()+"%"));
                 panel.add(new tabItem("磁盘类型", storageDto.getMainStorage()));
                 panel.add(new tabItem("磁盘容量", storageDto.getTotal()));
+                panel.add(new tabItem("磁盘数量", storageDto.getDiskCount()));
                 updateUI();
             }
         });
