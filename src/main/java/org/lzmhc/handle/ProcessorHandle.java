@@ -73,6 +73,7 @@ public class ProcessorHandle extends Thread implements InfoBuild{
         for(CentralProcessor.LogicalProcessor logicalProcessor: centralProcessor.getLogicalProcessors()){
             num = (logicalProcessor.getPhysicalProcessorNumber()>num)? logicalProcessor.getPhysicalProcessorNumber():num;
         }
+        num+=1;
         processorDto.setLogicalCoreNum(num);
     }
 

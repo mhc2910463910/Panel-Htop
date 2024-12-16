@@ -50,7 +50,7 @@ public class ProcessorTab extends ProcessorPanel implements templateTab {
                 panel.add(new tabItem("bit", processorDto.getBitDepth()));
                 panel.add(new tabItem("风扇速度", ((processorDto.getSensoresSpeedList().size()>0) ? processorDto.getSensoresSpeedList().toString() : "0")));
                 java.util.List<CentralProcessor.LogicalProcessor> logicalProcessors = processorDto.getLogicalProcessors();
-                panel.add(new tabItem("核心数", processorDto.getLogicalCoreNum()+""));
+                panel.add(new tabItem("核心数", processorDto.getLogicalCoreNum()+" 核心"));
                 for (CentralProcessor.LogicalProcessor logicalProcessor:logicalProcessors){
                     panel.add(new tabItem("逻辑处理器"+logicalProcessor.getProcessorNumber(), logicalProcessor.toString()));
                 }
