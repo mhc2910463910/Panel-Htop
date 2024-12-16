@@ -4,7 +4,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 import org.lzmhc.dto.InfoDto;
+import org.lzmhc.dto.singleton.InfoDtoSingleton;
 import oshi.SystemInfo;
+import oshi.hardware.CentralProcessor;
 import oshi.hardware.GraphicsCard;
 
 import java.util.List;
@@ -13,17 +15,28 @@ import java.util.List;
  * Unit test for simple App.
  */
 public class AppTest {
-    private SystemInfo systemInfo = new SystemInfo();
+    private SystemInfo systemInfo = InfoDtoSingleton.getInfoDto();
     /**
      * Rigorous Test :-)
      */
     @Test
     public void getOperatingSystemInfo() {
-        System.out.println("操作系统: "+systemInfo.getOperatingSystem().getFamily());
-        System.out.println("位数: "+systemInfo.getOperatingSystem().getBitness());
-        System.out.println("版本: "+systemInfo.getOperatingSystem().getVersionInfo().getVersion());
-        System.out.println("操作系统版本号: "+systemInfo.getOperatingSystem().getVersionInfo().getBuildNumber());
-        System.out.println("开机时间: "+systemInfo.getOperatingSystem().getSystemBootTime());
+        /**
+         * 逻辑处理器
+         */
+        List<CentralProcessor.LogicalProcessor> logicalProcessors = systemInfo.getHardware().getProcessor().getLogicalProcessors();
+        for(CentralProcessor.LogicalProcessor logicalProcessor:logicalProcessors){
+            System.out.println("核心ID"+logicalProcessor.getPhysicalProcessorNumber());
+            System.out.println("逻辑处理器编号"+logicalProcessor.getProcessorNumber());
+        }
+        /**
+         * 物理处理器
+         */
+        List<CentralProcessor.PhysicalProcessor> physicalProcessors = systemInfo.getHardware().getProcessor().getPhysicalProcessors();
+        for(CentralProcessor.PhysicalProcessor physicalProcessor: physicalProcessors){
+            System.out.println("核心ID"+physicalProcessor.getPhysicalProcessorNumber());
+            System.out.println("平台特定标识"+physicalProcessor.getIdString().split(","));
+        }
     }
     @Test
     public void getMemoryInfo(){
