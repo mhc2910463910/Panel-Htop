@@ -43,6 +43,8 @@ public class GraphicsTab extends GraphicsPanel implements templateTab {
                 panel.add(new tabItem("型号",graphicsCardDto.getName()));
                 panel.add(new tabItem("供应商", graphicsCardDto.getVendor()));
                 panel.add(new tabItem("显存", graphicsCardDto.getVram()));
+                panel.add(new tabItem("设备ID", graphicsCardDto.getDeviceId()));
+                panel.add(new tabItem("版本", graphicsCardDto.getVersionInfo()));
                 updateUI();
 //            }
 //        });

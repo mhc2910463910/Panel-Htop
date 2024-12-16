@@ -16,7 +16,7 @@ public class GraphicsPanel extends JPanel implements GetPanel{
     @Override
     public JPanel getPanel(){
         ImageIcon icon = new ImageIcon("img/graphics.png");
-        PanelItem item = new PanelItem(" 显卡 ",new GridLayout(4,1), icon);
+        PanelItem item = new PanelItem(" 显卡 ",new GridLayout(6,1), icon);
 
         CountDownLatch latch=new CountDownLatch(numThreads);
         Thread thread=new GraphicsCardHandle(graphicsCardDto, graphicsCards, latch);
@@ -29,6 +29,8 @@ public class GraphicsPanel extends JPanel implements GetPanel{
         item.addLabel("型号", graphicsCardDto.getName());
         item.addLabel("供应商", graphicsCardDto.getVendor());
         item.addLabel("显存", graphicsCardDto.getVram());
+        item.addLabel("设备ID", graphicsCardDto.getDeviceId());
+        item.addLabel("版本", graphicsCardDto.getVersionInfo());
         return item;
     }
 }
