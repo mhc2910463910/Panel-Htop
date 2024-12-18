@@ -9,11 +9,13 @@ import oshi.SystemInfo;
 import oshi.hardware.CentralProcessor;
 import oshi.hardware.GraphicsCard;
 import oshi.hardware.HWDiskStore;
+import oshi.hardware.NetworkIF;
 import oshi.software.os.FileSystem;
 import oshi.software.os.OSFileStore;
 import oshi.software.os.OSProcess;
 import oshi.software.os.OSSession;
 
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -26,11 +28,17 @@ public class AppTest {
         /**
          * 文件系统
          */
-//        FileSystem fileSystem = systemInfo.getOperatingSystem().getFileSystem();
-//        List<OSFileStore> fileStores = fileSystem.getFileStores();
-//        for(OSFileStore fileStore: fileStores){
-//            System.out.println(fileStore);
-//        }
+        FileSystem fileSystem = systemInfo.getOperatingSystem().getFileSystem();
+        List<OSFileStore> fileStores = fileSystem.getFileStores();
+        for(OSFileStore fileStore: fileStores){
+            System.out.print("分区"+fileStore.getName()+" ");
+            System.out.print("挂载点"+fileStore.getMount()+" ");
+            System.out.print("文件系统"+fileStore.getType()+" ");
+            System.out.print("空闲空间"+fileStore.getFreeSpace()+"");
+            System.out.print("已使用空间"+fileStore.getUsableSpace()+"");
+            System.out.print("总空间"+fileStore.getTotalSpace()+"");
+            System.out.println();
+        }
 //        List<OSSession> sessions = systemInfo.getOperatingSystem().getSessions();
 //        for(OSSession osSession:sessions){
 //            System.out.println(osSession.getHost());
@@ -137,4 +145,18 @@ public class AppTest {
 //        }
 //
 //    }
+    @Test
+    public void getNetword(){
+        List<NetworkIF> networkIFs = systemInfo.getHardware().getNetworkIFs();
+        for(NetworkIF networkIF:networkIFs){
+            System.out.print(networkIF.getName()+" ");
+            System.out.print(networkIF.getDisplayName()+" ");
+            System.out.print(Arrays.toString(networkIF.getIPv4addr()) +" ");
+            System.out.print(Arrays.toString(networkIF.getIPv6addr()) +" ");
+            System.out.print(networkIF.getMacaddr()+" ");
+            System.out.print(networkIF.getMTU()+" ");
+            System.out.println();
+        }
+
+    }
 }

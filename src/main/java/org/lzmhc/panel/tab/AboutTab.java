@@ -10,11 +10,10 @@ import java.net.URI;
 
 public class AboutTab extends JPanel{
     public AboutTab(){
-        JLabel title = new JLabel(IconUtil.loadIcon(new ImageIcon("img/java.png"),256));
-        JLabel label=new JLabel("此项目是一款功能类似htop命令的可视化系统信息面板。");
+        JLabel title = new JLabel(IconUtil.loadIcon(new ImageIcon("img/logo.png"),256));
+        JLabel label=new JLabel("使用OSHI模块和FlatLaf开发的一款可视化系统信息面板。");
         label.setHorizontalAlignment(SwingConstants.CENTER);
-        ImageIcon icon = new ImageIcon("img/github-mark.png");
-        JLabel btnlabel=new JLabel(IconUtil.loadIcon(new ImageIcon("img/github-mark.png"),64),0);
+        JLabel btnlabel=new JLabel(IconUtil.loadIcon(new ImageIcon("img/github-mark-white.png"),64),0);
         btnlabel.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
