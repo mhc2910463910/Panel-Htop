@@ -46,4 +46,12 @@ public class ProcessorDto implements InfoItem {
         /**
          * 利用率
          */
+        private int logicalCoreNum;
+        /**
+         * 核心数量
+         */
+        private List<CentralProcessor.LogicalProcessor> logicalProcessors;
+        /**
+         * 逻辑处理器
+         */
 }

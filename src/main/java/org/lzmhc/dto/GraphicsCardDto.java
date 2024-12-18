@@ -22,4 +22,12 @@ public class GraphicsCardDto implements InfoItem {
     /**
      * 显存
      */
+    private String deviceId;
+    /**
+     * 设备ID
+     */
+    private String versionInfo;
+    /**
+     * 版本信息
+     */
 }

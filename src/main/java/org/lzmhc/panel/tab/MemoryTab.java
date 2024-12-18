@@ -43,9 +43,9 @@ public class MemoryTab extends MemoryPanel implements templateTab {
                 panel.add(new tabItem("物理内存", globalMemoryDto.getTotalMemory()));
                 panel.add(new tabItem("已使用", globalMemoryDto.getUsedMemory()));
                 panel.add(new tabItem("可用", globalMemoryDto.getAvailableMemory()));
-                panel.add(new tabItem("虚拟内存", globalMemoryDto.getVirtualUsedMemory()));
+                panel.add(new tabItem("虚拟内存", globalMemoryDto.getVirtuallMemory()));
                 panel.add(new tabItem("已使用", globalMemoryDto.getVirtualUsedMemory()));
-                panel.add(new tabItem("可用", globalMemoryDto.getVirtuallMemory()));
+                panel.add(new tabItem("可用", globalMemoryDto.getAvailabelVirtualMemory()));
                 panel.add(new tabItem("内存类型 or bit",globalMemoryDto.getRamTypeOrOsBitDepth()));
                 updateUI();
             }

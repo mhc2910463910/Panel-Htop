@@ -18,7 +18,7 @@ public class StoragePanel extends JPanel implements GetPanel{
     @Override
     public JPanel getPanel(){
         ImageIcon icon=new ImageIcon("img/ssd.png");
-        PanelItem item = new PanelItem("磁盘",new GridLayout(4,1), icon);
+        PanelItem item = new PanelItem("磁盘",new GridLayout(6,1), icon);
         CountDownLatch latch=new CountDownLatch(numThreads);
         Thread thread=new StorageHandle(storageDto, diskStores,latch);
         thread.start();
@@ -27,9 +27,11 @@ public class StoragePanel extends JPanel implements GetPanel{
         } catch (InterruptedException err) {
             err.printStackTrace();
         }
-        item.addLabel("I/O", storageDto.getUsedRate()+"%");
+        item.addLabel("使用率", storageDto.getUsedRate()+"%");
         item.addLabel("磁盘类型", storageDto.getMainStorage());
         item.addLabel("磁盘容量", storageDto.getTotal());
+        item.addLabel("写入次数", storageDto.getWriteCount()+"");
+        item.addLabel("读取次数", storageDto.getReadCount()+"");
         Timer time = new Timer(5000, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -41,9 +43,11 @@ public class StoragePanel extends JPanel implements GetPanel{
                     err.printStackTrace();
                 }
                 item.removeAll();
-                item.addLabel("I/O", storageDto.getUsedRate()+"%");
+                item.addLabel("使用率", storageDto.getUsedRate()+"%");
                 item.addLabel("磁盘类型", storageDto.getMainStorage());
                 item.addLabel("磁盘容量", storageDto.getTotal());
+                item.addLabel("写入次数", storageDto.getWriteCount()+"");
+                item.addLabel("读取次数", storageDto.getReadCount()+"");
                 item.updateUI();
 //                System.out.println(objTojson(storageDto));
             }

@@ -4,9 +4,11 @@ import javax.swing.*;
 
 import com.formdev.flatlaf.intellijthemes.FlatSolarizedDarkIJTheme;
 import org.lzmhc.dto.singleton.InfoDtoSingleton;
+import org.lzmhc.panel.component.PartitionPanel;
 import org.lzmhc.panel.generalPanel.PanelIndex;
 import org.lzmhc.panel.tab.*;
 import org.lzmhc.utils.FontUtil;
+import org.lzmhc.utils.IconUtil;
 
 import java.awt.*;
 
@@ -27,7 +29,9 @@ public class HtopPanel extends JFrame {
         JPanel panel_4 = new OperatingSystemTab(InfoDtoSingleton.getInfoDto().getOperatingSystem().getFamily().toLowerCase().equals("windows")?"img/windows.png":"img/linux.png");
         JPanel panel_5 = new GraphicsTab( "img/graphics.png");
         JPanel panel_6 = new PowTab("img/pow.png");
-        JPanel panel_7 = new AboutTab();
+        JPanel panel_7 = new PartitionTab();
+        JPanel panel_8 = new NetworkTab();
+        JPanel panel_9 = new AboutTab();
         JTabbedPane tabbedPane = new JTabbedPane();
         tabbedPane.addTab("概览",panel_index);
         tabbedPane.addTab("处理器",panel_1);
@@ -36,9 +40,12 @@ public class HtopPanel extends JFrame {
         tabbedPane.addTab("操作系统",panel_4);
         tabbedPane.addTab("显卡",panel_5);
         tabbedPane.addTab("电源",panel_6);
-        tabbedPane.addTab("关于",panel_7);
+        tabbedPane.addTab("分区",panel_7);
+        tabbedPane.addTab("网卡设备",panel_8);
+        tabbedPane.addTab("关于",panel_9);
         add(tabbedPane);
-//        this.setResizable(false);
+        Toolkit tookit=Toolkit.getDefaultToolkit();
+        this.setIconImage(IconUtil.loadIcon(new ImageIcon("img/logo.png"), 512).getImage());
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     }
 

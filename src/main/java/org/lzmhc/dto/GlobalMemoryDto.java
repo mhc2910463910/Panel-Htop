@@ -3,6 +3,9 @@ package org.lzmhc.dto;
 import lombok.Getter;
 import lombok.Setter;
 import org.lzmhc.dto.ItemInterface.InfoItem;
+import oshi.hardware.CentralProcessor;
+
+import java.util.List;
 
 @Getter
 @Setter
@@ -23,6 +26,10 @@ public class GlobalMemoryDto implements InfoItem {
     /**
      * 已用虚拟内存
      */
+    private String availabelVirtualMemory;
+    /**
+     * 可用虚拟内存
+     */
     private String virtuallMemory;
     /**
      * 虚拟内存
@@ -39,4 +46,5 @@ public class GlobalMemoryDto implements InfoItem {
     /**
      * Processes Count field
      */
+
 }

@@ -55,7 +55,7 @@ public class StorageHandle extends Thread implements InfoBuild{
                 storageDto.setMainStorage("Undefined");
             }
             long total = hwDiskStoreList.stream().mapToLong(HWDiskStore::getSize).sum();
-            storageDto.setTotal(getConvertedCapacity(total) + " Total");
+            storageDto.setTotal(getConvertedCapacity(total) + "");
             int diskCount = hwDiskStoreList.size();
             storageDto.setDiskCount(diskCount + ((diskCount > 1) ? "Disks" : "Disk"));
             FileSystem fileSystem = InfoDtoSingleton.getInfoDto().getOperatingSystem().getFileSystem();
@@ -63,6 +63,11 @@ public class StorageHandle extends Thread implements InfoBuild{
             long freeStorages = fileSystem.getFileStores().stream().mapToLong(OSFileStore::getFreeSpace).sum();
             String usedRate = String.valueOf((int)Math.round(((double)(totalStorage-freeStorages)/totalStorage)*100));
             storageDto.setUsedRate(usedRate);
+
+            storageDto.setReadCount(hwDiskStore.getReads());
+            storageDto.setReadbytes((long) (hwDiskStore.getReadBytes()/1024.0/1024.0/1024.0));
+            storageDto.setWriteCount(hwDiskStore.getWrites());
+            storageDto.setWritebytes((long) (hwDiskStore.getWriteBytes()/1024.0/1024.0/1024.0));
 //            System.out.println(storageDto.getUsedRate());
     }
 

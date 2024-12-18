@@ -4,38 +4,75 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 import org.lzmhc.dto.InfoDto;
+import org.lzmhc.dto.singleton.InfoDtoSingleton;
 import oshi.SystemInfo;
+import oshi.hardware.CentralProcessor;
 import oshi.hardware.GraphicsCard;
+import oshi.hardware.HWDiskStore;
+import oshi.hardware.NetworkIF;
+import oshi.software.os.FileSystem;
+import oshi.software.os.OSFileStore;
+import oshi.software.os.OSProcess;
+import oshi.software.os.OSSession;
 
+import java.util.Arrays;
 import java.util.List;
 
 /**
  * Unit test for simple App.
  */
 public class AppTest {
-    private SystemInfo systemInfo = new SystemInfo();
+    private SystemInfo systemInfo = InfoDtoSingleton.getInfoDto();
+    @Test
+    public void getOperatingSystem(){
+        /**
+         * 文件系统
+         */
+        FileSystem fileSystem = systemInfo.getOperatingSystem().getFileSystem();
+        List<OSFileStore> fileStores = fileSystem.getFileStores();
+        for(OSFileStore fileStore: fileStores){
+            System.out.print("分区"+fileStore.getName()+" ");
+            System.out.print("挂载点"+fileStore.getMount()+" ");
+            System.out.print("文件系统"+fileStore.getType()+" ");
+            System.out.print("空闲空间"+fileStore.getFreeSpace()+"");
+            System.out.print("已使用空间"+fileStore.getUsableSpace()+"");
+            System.out.print("总空间"+fileStore.getTotalSpace()+"");
+            System.out.println();
+        }
+//        List<OSSession> sessions = systemInfo.getOperatingSystem().getSessions();
+//        for(OSSession osSession:sessions){
+//            System.out.println(osSession.getHost());
+//        }
+    }
     /**
      * Rigorous Test :-)
      */
-    @Test
-    public void getOperatingSystemInfo() {
-        System.out.println("操作系统: "+systemInfo.getOperatingSystem().getFamily());
-        System.out.println("位数: "+systemInfo.getOperatingSystem().getBitness());
-        System.out.println("版本: "+systemInfo.getOperatingSystem().getVersionInfo().getVersion());
-        System.out.println("操作系统版本号: "+systemInfo.getOperatingSystem().getVersionInfo().getBuildNumber());
-        System.out.println("开机时间: "+systemInfo.getOperatingSystem().getSystemBootTime());
-    }
-    @Test
-    public void getMemoryInfo(){
-        System.out.println("物理内存: "+systemInfo.getHardware().getMemory().getTotal());
-        System.out.println("可用物理内存: "+systemInfo.getHardware().getMemory().getAvailable());
-        System.out.println("已用物理内存: "+(systemInfo.getHardware().getMemory().getTotal()-systemInfo.getHardware().getMemory().getAvailable()));
-//        System.out.println("物理内存利用率: "+systemInfo.getGlobalMemory().getPercentage()+" %");
-//        System.out.println("虚拟内存: "+systemInfo.getGlobalMemory().getVirtuallMemory()+" GB");
-//        System.out.println("已用虚拟内存: "+systemInfo.getGlobalMemoryDto().getVirtualUsedMemory()+" GB");
-//        System.out.println("内存类型/位: "+systemInfo.getGlobalMemoryDto().getRamTypeOrOsBitDepth());
-//        System.out.println("进程数: "+systemInfo.getGlobalMemoryDto().getProcCount());
-    }
+//    @Test
+//    public void getOperatingSystemInfo() {
+//        /**
+//         * 逻辑处理器
+//         */
+//        List<CentralProcessor.LogicalProcessor> logicalProcessors = systemInfo.getHardware().getProcessor().getLogicalProcessors();
+//        for(CentralProcessor.LogicalProcessor logicalProcessor:logicalProcessors){
+//            System.out.println("核心ID"+logicalProcessor.getPhysicalProcessorNumber());
+//            System.out.println("逻辑处理器编号"+logicalProcessor.getProcessorNumber());
+//        }
+//        /**
+//         * 物理处理器
+//         */
+//        List<CentralProcessor.PhysicalProcessor> physicalProcessors = systemInfo.getHardware().getProcessor().getPhysicalProcessors();
+//        for(CentralProcessor.PhysicalProcessor physicalProcessor: physicalProcessors){
+//            System.out.println("核心ID"+physicalProcessor.getPhysicalProcessorNumber());
+//            System.out.println("平台特定标识"+physicalProcessor.getIdString().split(","));
+//        }
+//    }
+//    @Test
+//    public void getMemoryInfo(){
+//        System.out.println(systemInfo.getHardware().getMemory().getPhysicalMemory());
+//        System.out.println("物理内存: "+systemInfo.getHardware().getMemory().getTotal());
+//        System.out.println("可用物理内存: "+systemInfo.getHardware().getMemory().getAvailable());
+//        System.out.println("已用物理内存: "+(systemInfo.getHardware().getMemory().getTotal()-systemInfo.getHardware().getMemory().getAvailable()));
+//    }
 
 //    @Test
 //    public void getProcessorInfo(){
@@ -74,8 +111,20 @@ public class AppTest {
 //        System.out.println("电池性质: "+systemInfo.getPowerDto().getChemistry());
 //        System.out.println("电池制造商: "+systemInfo.getPowerDto().getManufacturer());
 //    }
-//    @Test
-//    public void getStorageInfo(){
+    @Test
+    public void getStorageInfo(){
+        List<HWDiskStore> diskStores = systemInfo.getHardware().getDiskStores();
+        for (HWDiskStore diskStore: diskStores){
+            System.out.println(diskStore.getModel());
+            System.out.println(diskStore.getName());
+            System.out.println(diskStore.getSize());
+//            System.out.println(diskStore.getPartitions());
+            System.out.println(diskStore.getReads());
+            System.out.println(diskStore.getReadBytes());
+//            System.out.println(diskStore.getCurrentQueueLength());
+            System.out.println(diskStore.getWrites());
+            System.out.println(diskStore.getWriteBytes());
+        }
 //        InfoDto systemInfo = (InfoDto) infoController.getInfo().getsystemInfo();
 //        List<StorageDto> storageDtoList = systemInfo.getStorageDtoList();
 //        for(StorageDto storageDto:storageDtoList) {
@@ -84,7 +133,7 @@ public class AppTest {
 //            System.out.println("磁盘空间: " + storageDto.getTotal());
 //            System.out.println("磁盘I/O率:" + storageDto.getUsedRate());
 //        }
-//    }
+    }
 //    @Test
 //    public void getGraphicsCardsInfo(){
 //        InfoDto systemInfo = (InfoDto) infoController.getInfo().getsystemInfo();
@@ -96,4 +145,18 @@ public class AppTest {
 //        }
 //
 //    }
+    @Test
+    public void getNetword(){
+        List<NetworkIF> networkIFs = systemInfo.getHardware().getNetworkIFs();
+        for(NetworkIF networkIF:networkIFs){
+            System.out.print(networkIF.getName()+" ");
+            System.out.print(networkIF.getDisplayName()+" ");
+            System.out.print(Arrays.toString(networkIF.getIPv4addr()) +" ");
+            System.out.print(Arrays.toString(networkIF.getIPv6addr()) +" ");
+            System.out.print(networkIF.getMacaddr()+" ");
+            System.out.print(networkIF.getMTU()+" ");
+            System.out.println();
+        }
+
+    }
 }

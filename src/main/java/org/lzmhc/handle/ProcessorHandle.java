@@ -59,12 +59,22 @@ public class ProcessorHandle extends Thread implements InfoBuild{
          */
         long[] prevTicksArray = centralProcessor.getSystemCpuLoadTicks();
         long prevTotalTicks = Arrays.stream(prevTicksArray).sum();
-        long prevIdleTicks = prevTicksArray[CentralProcessor.TickType.IDLE.getIndex()];
+        long prevIdleTicks = prevTicksArray[CentralProcessor.TickType.IDLE.ordinal()];
         Util.sleep(1000);
         long[] currTicksArray = centralProcessor.getSystemCpuLoadTicks();
         long currTotalTicks = Arrays.stream(currTicksArray).sum();
-        long currIdleTicks = currTicksArray[CentralProcessor.TickType.IDLE.getIndex()];
+        long currIdleTicks = currTicksArray[CentralProcessor.TickType.IDLE.ordinal()];
         processorDto.setUsedRate(String.valueOf((int)Math.round((1-((double)(currIdleTicks-prevIdleTicks))/((double)(currTotalTicks-prevTotalTicks)))*100)));
+        /**
+         * 逻辑处理器
+         */
+        processorDto.setLogicalProcessors(centralProcessor.getLogicalProcessors());
+        int num =0;
+        for(CentralProcessor.LogicalProcessor logicalProcessor: centralProcessor.getLogicalProcessors()){
+            num = (logicalProcessor.getPhysicalProcessorNumber()>num)? logicalProcessor.getPhysicalProcessorNumber():num;
+        }
+        num+=1;
+        processorDto.setLogicalCoreNum(num);
     }
 
     @Override

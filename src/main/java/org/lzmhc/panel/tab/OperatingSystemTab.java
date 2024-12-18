@@ -43,10 +43,15 @@ public class OperatingSystemTab extends OperatingSystemPanel implements template
                 }
                 panel.removeAll();
                 panel.add(new tabItem("操作系统",operatingSystemDto.getFamily()));
+                panel.add(new tabItem("操作系统制造商",operatingSystemDto.getManufacturer()));
+//                panel.add(new tabItem("当前进程PID",operatingSystemDto.getProcessId()+""));
                 panel.add(new tabItem("bit", operatingSystemDto.getBitness()+" bit"));
                 panel.add(new tabItem("版本", operatingSystemDto.getVersionInfo().getVersion()));
                 panel.add(new tabItem("操作系统版本", operatingSystemDto.getVersionInfo().getBuildNumber()));
                 panel.add(new tabItem("开机时间", operatingSystemDto.getSystemboottime()));
+                panel.add(new tabItem("进程数", operatingSystemDto.getProcessCount()+" "));
+                panel.add(new tabItem("运行时间", operatingSystemDto.getRunTime()));
+                panel.add(new tabItem("当前时间",operatingSystemDto.getCurrentTime()));
                 updateUI();
             }
         });

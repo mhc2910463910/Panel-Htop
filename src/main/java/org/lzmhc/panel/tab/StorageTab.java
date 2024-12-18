@@ -40,9 +40,14 @@ public class StorageTab extends StoragePanel implements templateTab {
                     err.printStackTrace();
                 }
                 panel.removeAll();
-                panel.add(new tabItem("磁盘I/O",storageDto.getUsedRate()+"%"));
+                panel.add(new tabItem("磁盘使用率",storageDto.getUsedRate()+"%"));
                 panel.add(new tabItem("磁盘类型", storageDto.getMainStorage()));
                 panel.add(new tabItem("磁盘容量", storageDto.getTotal()));
+                panel.add(new tabItem("读取次数", storageDto.getReadCount()+""));
+//                panel.add(new tabItem("读取速率", storageDto.getReadbytes()+""));
+                panel.add(new tabItem("写入次数", storageDto.getWriteCount()+""));
+//                panel.add(new tabItem("写入速率", storageDto.getWritebytes()+""));
+
                 updateUI();
             }
         });

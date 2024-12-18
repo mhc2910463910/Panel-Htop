@@ -23,6 +23,8 @@ public class GraphicsCardHandle extends Thread implements InfoBuild{
         List<GraphicsCard> graphicsCards = (List<GraphicsCard>) obj;
         graphicsCardDto.setName(graphicsCards.get(0).getName());
         graphicsCardDto.setVendor(graphicsCards.get(0).getVendor());
+        graphicsCardDto.setDeviceId(graphicsCards.get(0).getDeviceId());
+        graphicsCardDto.setVendor(graphicsCards.get(0).getVersionInfo());
         graphicsCardDto.setVram(graphicsCards.get(0).getVRam()/1024.0/1024.0 + "MB");
     }
 
