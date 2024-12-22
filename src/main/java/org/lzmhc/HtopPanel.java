@@ -47,6 +47,9 @@ public class HtopPanel extends JFrame {
         JPanel panel_4 = new OperatingSystemTab(OSlogo);
         JPanel panel_5 = new GraphicsTab( "img/graphics.png");
         JPanel panel_6 = new PowTab("img/pow.png");
+        /**
+         * 分区信息，玲珑版屏蔽
+         */
         JPanel panel_7 = new PartitionTab();
         JPanel panel_8 = new NetworkTab();
         JPanel panel_9 = new AboutTab();
