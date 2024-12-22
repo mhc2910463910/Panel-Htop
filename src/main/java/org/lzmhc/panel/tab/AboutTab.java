@@ -1,5 +1,6 @@
 package org.lzmhc.panel.tab;
 
+import lombok.extern.log4j.Log4j;
 import org.lzmhc.utils.IconUtil;
 
 import javax.swing.*;
@@ -7,6 +8,7 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.net.URI;
+import java.util.logging.Logger;
 
 public class AboutTab extends JPanel{
     public AboutTab(){
@@ -18,6 +20,7 @@ public class AboutTab extends JPanel{
             @Override
             public void mouseClicked(MouseEvent e) {
                 if(Desktop.isDesktopSupported()){
+                    System.out.println("支持");
                     Desktop desktop=Desktop.getDesktop();
                     if(desktop.isSupported(Desktop.Action.BROWSE)){
                         try{
@@ -27,6 +30,8 @@ public class AboutTab extends JPanel{
                             err.printStackTrace();
                         }
                     }
+                }else{
+                    System.out.println("不支持");
                 }
             }
         });
