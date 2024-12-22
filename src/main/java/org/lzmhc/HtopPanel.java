@@ -2,7 +2,10 @@ package org.lzmhc;
 
 import javax.swing.*;
 
+import com.formdev.flatlaf.intellijthemes.FlatMaterialDesignDarkIJTheme;
 import com.formdev.flatlaf.intellijthemes.FlatSolarizedDarkIJTheme;
+import com.formdev.flatlaf.intellijthemes.materialthemeuilite.FlatMaterialOceanicIJTheme;
+import com.formdev.flatlaf.intellijthemes.materialthemeuilite.FlatMoonlightIJTheme;
 import org.lzmhc.dto.singleton.InfoDtoSingleton;
 import org.lzmhc.panel.component.PartitionPanel;
 import org.lzmhc.panel.generalPanel.PanelIndex;
@@ -26,9 +29,27 @@ public class HtopPanel extends JFrame {
         JPanel panel_1 = new ProcessorTab("img/cpu.png");
         JPanel panel_2 = new MemoryTab("img/ram.png");
         JPanel panel_3 = new StorageTab( "img/ssd.png");
-        JPanel panel_4 = new OperatingSystemTab(InfoDtoSingleton.getInfoDto().getOperatingSystem().getFamily().toLowerCase().equals("windows")?"img/windows.png":"img/linux.png");
+        String family = InfoDtoSingleton.getInfoDto().getOperatingSystem().getFamily().toLowerCase();
+        String OSlogo="";
+        if(family.equals("windows")){
+            OSlogo="img/windows.png";
+        }else if(family.equals("deepin")){
+            OSlogo="img/deepin.png";
+        }else if(family.equals("ubuntu")){
+            OSlogo="img/ubuntu.png";
+        }else if(family.equals("debian")){
+            OSlogo="img/debian.png";
+        }else if(family.equals("arch")){
+            OSlogo="img/arch.png";
+        }else{
+            OSlogo="img/linux.png";
+        }
+        JPanel panel_4 = new OperatingSystemTab(OSlogo);
         JPanel panel_5 = new GraphicsTab( "img/graphics.png");
         JPanel panel_6 = new PowTab("img/pow.png");
+        /**
+         * 分区信息，玲珑版屏蔽
+         */
         JPanel panel_7 = new PartitionTab();
         JPanel panel_8 = new NetworkTab();
         JPanel panel_9 = new AboutTab();
@@ -60,6 +81,7 @@ public class HtopPanel extends JFrame {
         UIManager.put("Label.font", font);
         UIManager.put("Label.foreground", Color.decode("#1fab89"));
         UIManager.put("TextField.foreground", Color.green);
+        UIManager.put("TextComponent.arc", 10);
         FlatSolarizedDarkIJTheme.setup();
         JFrame htopPanel=new HtopPanel();
         htopPanel.setVisible(true);
@@ -67,7 +89,6 @@ public class HtopPanel extends JFrame {
 //        FlatSolarizedDarkIJTheme.install();
 //        FlatMaterialOceanicIJTheme.install();
 //        FlatMoonlightIJTheme.install();
-//        FlatSolarizedDarkIJTheme.install();
 
     }
 }
